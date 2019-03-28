@@ -7,22 +7,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.utilities.TrafficImageUtils;
+import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback{
 
-//    private TextView mTextView;
-
-    private ImageView image1;
-    private ImageView image2;
-    private ImageView image3;
-
+    private ImageView woodlandsHomeImage;
+    private ImageView tuasHomeImage;
+    private Button woodlandsButton;
+    private Button tuasButton;
     private ProgressBar loadingIndicator;
 
     @Override
@@ -30,15 +28,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TrafficImageUtils.runTrafficApi();
+        woodlandsHomeImage = (ImageView) findViewById(R.id.woodlands_home_image);
+        tuasHomeImage = (ImageView) findViewById(R.id.tuas_home_image);
+        woodlandsButton = (Button) findViewById(R.id.woodlands_button);
+        tuasButton = (Button) findViewById(R.id.tuas_button);
+        loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
 
-//        mTextView = (TextView) findViewById(R.id.text1);
+        new TrafficImageAsyncTask(this).execute();
 
-        image1 = (ImageView) findViewById(R.id.image1);
-        image2 = (ImageView) findViewById(R.id.image2);
-        image3 = (ImageView) findViewById(R.id.image3);
+        tuasButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tuasHomeImage.setVisibility(View.VISIBLE);
+            }
+        });
 
-        image2.setOnClickListener(new View.OnClickListener() {
+        woodlandsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tuasHomeImage.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        woodlandsHomeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;
@@ -48,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        image3.setOnClickListener(new View.OnClickListener() {
+        tuasHomeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = MainActivity.this;
@@ -58,25 +70,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        makeTrafficQuery();
-        Picasso
-                .with(this)
-                .load(TrafficImageUtils.getImageUrl(1))
-                .into(image1);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        makeTrafficQuery();
     }
 
-    private void makeTrafficQuery(){
+
+    @Override
+    public void onPreExecute() {
+        loadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onPostExecute(String[] result) {
+        loadingIndicator.setVisibility(View.INVISIBLE);
         Picasso
                 .with(this)
-                .load(TrafficImageUtils.getImageUrl(1))
-                .placeholder(R.mipmap.ic_launcher)
-                .into(image1);
+                .load(result[1])
+                .placeholder(R.drawable.fff)
+                .into(woodlandsHomeImage);
+        Picasso
+                .with(this)
+                .load(result[3])
+                .placeholder(R.drawable.fff)
+                .into(tuasHomeImage);
     }
 
     @Override
@@ -98,4 +117,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 }

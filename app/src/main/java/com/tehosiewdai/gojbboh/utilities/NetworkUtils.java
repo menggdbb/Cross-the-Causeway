@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * These utilities will be used to communicate with the network.
  */
-public class NetworkUtils {
+class NetworkUtils {
 
     /**
      * This method returns the entire result from the HTTP response.
@@ -18,7 +18,7 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
+    static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();

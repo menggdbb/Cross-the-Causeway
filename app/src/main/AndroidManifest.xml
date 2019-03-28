@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.SplashActivity"></activity>
         <activity android:name=".activities.WoodlandsTrafficImageActivity" />
         <activity android:name=".activities.TuasTrafficImageActivity" />
         <activity android:name=".activities.MoneyChangerActivity" />

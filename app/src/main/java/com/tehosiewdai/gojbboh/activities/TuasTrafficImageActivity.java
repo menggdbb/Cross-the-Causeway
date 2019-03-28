@@ -6,33 +6,39 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.utilities.TrafficImageUtils;
+import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
-public class TuasTrafficImageActivity extends AppCompatActivity {
+public class TuasTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
+
+    private ImageView imageView1;
+    private ImageView imageView2;
+    private ImageView imageView3;
+    private ImageView imageView4;
+    private ImageView imageView5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuas_traffic_image);
 
-        ImageView imageView1 = findViewById(R.id.image_view1);
-        String url1 = TrafficImageUtils.getImageUrl(0);
-        Picasso.with(this).load(url1).into(imageView1);
+        imageView1 = findViewById(R.id.image_view1);
+        imageView2 = findViewById(R.id.image_view2);
+        imageView3 = findViewById(R.id.image_view3);
+        imageView4 = findViewById(R.id.image_view4);
+        imageView5 = findViewById(R.id.image_view5);
 
-        ImageView imageView2 = findViewById(R.id.image_view2);
-        String url2 = TrafficImageUtils.getImageUrl(1);
-        Picasso.with(this).load(url2).into(imageView2);
+        new TrafficImageAsyncTask(this).execute();
+    }
 
-        ImageView imageView3 = findViewById(R.id.image_view3);
-        String url3 = TrafficImageUtils.getImageUrl(2);
-        Picasso.with(this).load(url3).into(imageView3);
+    @Override
+    public void onPreExecute() {}
 
-        ImageView imageView4 = findViewById(R.id.image_view4);
-        String url4 = TrafficImageUtils.getImageUrl(3);
-        Picasso.with(this).load(url4).into(imageView4);
-
-        ImageView imageView5 = findViewById(R.id.image_view5);
-        String url5 = TrafficImageUtils.getImageUrl(4);
-        Picasso.with(this).load(url5).into(imageView5);
+    @Override
+    public void onPostExecute(String[] result) {
+        Picasso.with(this).load(result[0]).into(imageView1);
+        Picasso.with(this).load(result[1]).into(imageView2);
+        Picasso.with(this).load(result[2]).into(imageView3);
+        Picasso.with(this).load(result[3]).into(imageView4);
+        Picasso.with(this).load(result[4]).into(imageView5);
     }
 }
