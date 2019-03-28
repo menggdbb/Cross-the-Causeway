@@ -1,7 +1,6 @@
 package com.tehosiewdai.gojbboh.utilities;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +14,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
 
     private String trafficUrlString = "https://api.data.gov.sg/v1/transport/traffic-images";
 
-    private TrafficImageTaskCallback callback = null;
+    private TrafficImageTaskCallback callback;
 
     public TrafficImageAsyncTask(TrafficImageTaskCallback callback){
         this.callback = callback;
@@ -25,7 +24,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
     protected void onPreExecute() {
         super.onPreExecute();
         if (callback != null){
-            callback.onPreExecute();
+            callback.onPreExecuteTrafficTask();
         }
     }
 
@@ -57,7 +56,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
     @Override
     protected void onPostExecute(String[] result) {
         if (callback != null){
-            callback.onPostExecute(result);
+            callback.onPostExecuteTrafficTask(result);
         }
     }
 
@@ -117,7 +116,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
     }
 
     public interface TrafficImageTaskCallback {
-        void onPreExecute();
-        void onPostExecute(String[] result);
+        void onPreExecuteTrafficTask();
+        void onPostExecuteTrafficTask(String[] result);
     }
 }

@@ -31,10 +31,10 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onPreExecute() {}
+    public void onPreExecuteTrafficTask() {}
 
     @Override
-    public void onPostExecute(String[] result) {
+    public void onPostExecuteTrafficTask(String[] result) {
         Picasso.with(this).load(result[5]).into(imageView6);
         Picasso.with(this).load(result[6]).into(imageView7);
         Picasso.with(this).load(result[7]).into(imageView8);

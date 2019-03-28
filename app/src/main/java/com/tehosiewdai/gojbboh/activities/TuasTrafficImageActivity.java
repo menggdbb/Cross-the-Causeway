@@ -31,10 +31,10 @@ public class TuasTrafficImageActivity extends AppCompatActivity implements Traff
     }
 
     @Override
-    public void onPreExecute() {}
+    public void onPreExecuteTrafficTask() {}
 
     @Override
-    public void onPostExecute(String[] result) {
+    public void onPostExecuteTrafficTask(String[] result) {
         Picasso.with(this).load(result[0]).into(imageView1);
         Picasso.with(this).load(result[1]).into(imageView2);
         Picasso.with(this).load(result[2]).into(imageView3);

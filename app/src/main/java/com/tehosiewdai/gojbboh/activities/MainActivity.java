@@ -10,18 +10,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
+import com.tehosiewdai.gojbboh.utilities.WeatherAsyncTask;
 
-public class MainActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback{
+public class MainActivity extends AppCompatActivity implements
+        TrafficImageAsyncTask.TrafficImageTaskCallback, WeatherAsyncTask.WeatherTaskCallback {
 
     private ImageView woodlandsHomeImage;
     private ImageView tuasHomeImage;
-    private Button woodlandsButton;
-    private Button tuasButton;
     private ProgressBar loadingIndicator;
+    private TextView woodlandsWeatherDescription;
+    private TextView tuasWeatherDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +33,17 @@ public class MainActivity extends AppCompatActivity implements TrafficImageAsync
 
         woodlandsHomeImage = (ImageView) findViewById(R.id.woodlands_home_image);
         tuasHomeImage = (ImageView) findViewById(R.id.tuas_home_image);
-        woodlandsButton = (Button) findViewById(R.id.woodlands_button);
-        tuasButton = (Button) findViewById(R.id.tuas_button);
-        loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
+
+        Button woodlandsButton = (Button) findViewById(R.id.woodlands_button);
+        Button tuasButton = (Button) findViewById(R.id.tuas_button);
+
+        loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator_traffic);
+
+        woodlandsWeatherDescription = (TextView) findViewById(R.id.woodlands_description);
+        tuasWeatherDescription = (TextView) findViewById(R.id.tuas_description);
 
         new TrafficImageAsyncTask(this).execute();
+        new WeatherAsyncTask(this).execute();
 
         tuasButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,18 +82,12 @@ public class MainActivity extends AppCompatActivity implements TrafficImageAsync
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-
-    @Override
-    public void onPreExecute() {
+    public void onPreExecuteTrafficTask() {
         loadingIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onPostExecute(String[] result) {
+    public void onPostExecuteTrafficTask(String[] result) {
         loadingIndicator.setVisibility(View.INVISIBLE);
         Picasso
                 .with(this)
@@ -96,6 +99,17 @@ public class MainActivity extends AppCompatActivity implements TrafficImageAsync
                 .load(result[3])
                 .placeholder(R.drawable.fff)
                 .into(tuasHomeImage);
+    }
+
+    @Override
+    public void onPreExecuteWeatherTask() {
+
+    }
+
+    @Override
+    public void onPostExecuteWeatherTask(String[] result) {
+        woodlandsWeatherDescription.setText(result[0]);
+        tuasWeatherDescription.setText(result[1]);
     }
 
     @Override
