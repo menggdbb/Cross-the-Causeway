@@ -13,4 +13,65 @@
         android:text="currency page"
         android:textSize="30sp"/>
 
+    <Button
+        android:id="@+id/convert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Convert"/>
+
+    <ToggleButton
+        android:id="@+id/switchConvert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="320dp"
+        android:textOff="SGD to MYR"
+        android:textOn="MYR to SGD" />
+
+    <TextView
+        android:id="@+id/exchangeRate"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@id/convert"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-33dp"
+        android:gravity="center"
+        android:text="SGD to MYR"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/SGD"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="200dp"
+        android:inputType="numberDecimal"
+        android:singleLine="false"
+        android:text="0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SGD"
+        android:textSize="100sp"
+        android:layout_alignBaseline="@id/SGD"
+        android:layout_marginLeft="177dp"/>
+
+    <EditText
+        android:id="@+id/MYR"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="420dp"
+        android:inputType="numberDecimal"
+        android:text="0" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MYR"
+        android:textSize="100sp"
+        android:layout_alignBaseline="@id/MYR" />
+
+
 </RelativeLayout>

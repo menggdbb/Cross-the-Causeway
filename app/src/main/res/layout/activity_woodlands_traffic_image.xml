@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.TuasTrafficImageActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/woodlands_text"
@@ -13,4 +17,41 @@
         android:text="woodlands page"
         android:textSize="30sp"/>
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/image_view6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/woodlands_text"
+        />
+
+    <ImageView
+        android:id="@+id/image_view7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view6"
+        />
+
+    <ImageView
+        android:id="@+id/image_view8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view7"
+        />
+
+    <ImageView
+        android:id="@+id/image_view9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view8"
+        />
+
+    <ImageView
+        android:id="@+id/image_view10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view9"
+        />
+
+    </RelativeLayout>
+
+</ScrollView>
