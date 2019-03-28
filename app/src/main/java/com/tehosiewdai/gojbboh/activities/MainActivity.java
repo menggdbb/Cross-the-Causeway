@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -22,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView image2;
     private ImageView image3;
 
+    private ProgressBar loadingIndicator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TrafficImageUtils.runTrafficApi();
 
 //        mTextView = (TextView) findViewById(R.id.text1);
 
@@ -53,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        makeTrafficQuery();
+//        makeTrafficQuery();
+        Picasso
+                .with(this)
+                .load(TrafficImageUtils.getImageUrl(1))
+                .into(image1);
     }
 
     @Override
@@ -63,7 +72,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeTrafficQuery(){
-        Picasso.with(this).load(TrafficImageUtils.getTrafficString()).into(image1);
+        Picasso
+                .with(this)
+                .load(TrafficImageUtils.getImageUrl(1))
+                .placeholder(R.mipmap.ic_launcher)
+                .into(image1);
     }
 
     @Override

@@ -60,8 +60,6 @@ public class TrafficImageUtils {
 
         JSONObject trafficObject = null;
 
-        Log.e("this","ok");
-
         try {
             trafficObject = new JSONObject(results);
         } catch (JSONException e) {
@@ -69,8 +67,6 @@ public class TrafficImageUtils {
         }
 
         JSONArray trafficImages = null;
-
-        Log.e("this","ok2");
 
         try {
             trafficImages = trafficObject.getJSONArray("items");
@@ -109,110 +105,10 @@ public class TrafficImageUtils {
                 urlArray[9] = (String) cameras.getJSONObject(i).get("image");
             }
         }
-
-        JSONObject trafficImage0 = null;
-        Log.e("this","ok3");
-
-        try {
-            trafficImage0 = trafficImages.getJSONObject(0).getJSONArray("cameras").getJSONObject(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Log.e("this","ok4");
-
-        String imageUrl = null;
-        try {
-            imageUrl = (String) trafficImage0.get("image");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Log.e("this","ok5");
-        trafficString = imageUrl;
-
-//        try {
-//            trafficString = "lat: " + trafficImage0.getJSONObject("location").get("latitude") +
-//                    "\nlong: " + trafficImage0.getJSONObject("location").get("longitude") +
-//                    "\ncam id: " + trafficImage0.get("camera_id");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-//        Picasso.with(this).load(imageUrl).into(image1);
-    }
-
-    private static String getImage(String results, int i, int cameraID) {
-
-        JSONObject trafficObject = null;
-
-        Log.e("this","ok");
-
-        try {
-            trafficObject = new JSONObject(results);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONArray trafficImages = null;
-
-        Log.e("this","ok2");
-
-        try {
-            trafficImages = trafficObject.getJSONArray("items");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject trafficImage0 = null;
-        Log.e("this","ok3");
-
-        try {
-
-            trafficImage0 = trafficImages.getJSONObject(0).getJSONArray("cameras").getJSONObject(i);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Log.e("this","ok4");
-
-
-        String imageUrl = null;
-
-        try {
-            imageUrl = (String) trafficImage0.get("image");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Log.e("this","ok5");
-        trafficString = imageUrl;
-
-        try {
-            if (trafficImage0.get("camera_id").equals(cameraID)) {
-                return imageUrl;
-            } else {
-                return imageUrl;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return imageUrl;
-
-//        try {
-//            trafficString = "lat: " + trafficImage0.getJSONObject("location").get("latitude") +
-//                    "\nlong: " + trafficImage0.getJSONObject("location").get("longitude") +
-//                    "\ncam id: " + trafficImage0.get("camera_id");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
-//        Picasso.with(this).load(imageUrl).into(image1);
     }
 
 
-    public static String getTrafficString(){
+    public static void runTrafficApi(){
 
         try {
             trafficUrl = new URL(urlString);
@@ -221,8 +117,6 @@ public class TrafficImageUtils {
         }
 
         new TrafficImageQueryTask().execute(trafficUrl);
-
-        return trafficString;
 
     }
 }
