@@ -16,7 +16,7 @@ import com.tehosiewdai.gojbboh.utilities.TrafficImageUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextView;
+//    private TextView mTextView;
 
     private ImageView image1;
     private ImageView image2;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextView = (TextView) findViewById(R.id.text1);
+//        mTextView = (TextView) findViewById(R.id.text1);
 
         image1 = (ImageView) findViewById(R.id.image1);
         image2 = (ImageView) findViewById(R.id.image2);
