@@ -13,7 +13,7 @@ import com.tehosiewdai.gojbboh.R;
 import com.tehosiewdai.gojbboh.utilities.ConvertCurrency;
 import com.tehosiewdai.gojbboh.utilities.FetchData;
 
-public class CurrencyActivity extends AppCompatActivity {
+public class CurrencyActivity extends AppCompatActivity implements FetchData.FetchDataCall {
     Button click;
     public static ToggleButton change;
     public static TextView data;
@@ -31,12 +31,7 @@ public class CurrencyActivity extends AppCompatActivity {
         change = findViewById(R.id.switchConvert);
         SGDinput = findViewById(R.id.SGD);
         MYRinput = findViewById(R.id.MYR);
-
-
-
-        final FetchData process = new FetchData();
-        process.execute();
-
+    new FetchData(this).execute();
         click.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -45,5 +40,15 @@ public class CurrencyActivity extends AppCompatActivity {
             }
         });
     };
+
+    @Override
+    public void onPreExecuteFetchData() {
+
+    }
+
+    @Override
+    public void onPostExecuteFetchData(String result) {
+        data.setText(result);
+    }
 
 }
