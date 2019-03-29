@@ -2,9 +2,6 @@ package com.tehosiewdai.gojbboh.utilities;
 
 import android.os.AsyncTask;
 
-import com.tehosiewdai.gojbboh.activities.CurrencyActivity;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,13 +14,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 
-public class FetchData extends AsyncTask<Void, Void, Void> {
-    String data = "";
-    String dataParsed = "";
+public class FetchData extends AsyncTask<Void, Void, String> {
+    private String data = "";
+    private String dataParsed = "";
+    private FetchDataCall callback;
     public static double SGDtoMYR;
     public DecimalFormat df = new DecimalFormat(".###");
+    public FetchData(FetchDataCall callback){
+        this.callback = callback;
+    }
+
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected void onPreExecute() {
+        super.onPreExecute();
+        if (callback != null){
+            callback.onPreExecuteFetchData();
+        }
+    }
+    @Override
+    protected String doInBackground(Void... voids) {
         try {
             URL url = new URL("https://api.exchangeratesapi.io/latest?base=SGD");
 
@@ -47,13 +56,18 @@ public class FetchData extends AsyncTask<Void, Void, Void> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return dataParsed;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(String result) {
+        if (callback != null){
+            callback.onPostExecuteFetchData(result);
+        }
+    }
 
-        CurrencyActivity.data.setText((this.dataParsed));
+    public interface FetchDataCall{
+        void onPreExecuteFetchData();
+        void onPostExecuteFetchData(String result);
     }
 }
