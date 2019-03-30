@@ -12,26 +12,38 @@ import java.util.Calendar;
 
 public class CalendarActivity extends AppCompatActivity {
     
-    TextView data;
-    String public_hols = "thursday, 30 March 2019";
+    String[] pHol = {"Good Friday", "Labour Day", "Hari Raya Puasa", "National Day", "Hari Raya Haji", "Deepavali", "Christmas Day"};
+    String[] pHol_date = {"Friday, 19 April 2019", "Wednesday, 1 May 2019", "Sunday, 19 May 2019", "Wednesday, 5 June 2019",
+            "Friday, 9 August 2019", "Sunday, 11 August 2019", "Sunday, 27 October 2019", "Wednesday, 25 December 2019"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        //Main Calendar Date
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
-        data = (TextView) findViewById(R.id.nextHoliday);
-
         TextView date1 = findViewById(R.id.date_1);
-        if(public_hols == currentDate){
-            date1.setText(currentDate);
-            date1.setTextColor(0xffff0000);
+        TextView nextHol = findViewById(R.id.nextHoliday);
+        TextView nextNextHol = findViewById(R.id.nextNextHoliday);
+        TextView pubHol = findViewById(R.id.p_hol_name);
+        date1.setText(currentDate);
+/*
+        //Calendar colour change on public holidays
+        int i = 0;
+        while (i < pHol_date.length){
+            if (pHol_date[i] == currentDate) {
+                date1.setTextColor(0xffff0000);
+                pubHol.setText(pHol[i]);
+                nextHol.setText(pHol[i+1]);
+                nextNextHol.setText(pHol[i+2]);
+                i++;
+            } else
+                date1.setTextColor(0xff000000);
+
         }
-        else
-            date1.setText(currentDate);
-            date1.setTextColor(0xff000000);
+*/
     }
 }
