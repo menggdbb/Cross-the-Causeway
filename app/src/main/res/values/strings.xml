@@ -2,4 +2,27 @@
     <string name="app_name">GoJbBoh</string>
     <string name="menu">menu</string>
     <string name="title_activity_menu">MenuActivity</string>
+
+
+    <!--weather descriptions-->
+    <string name="fair">Fair</string>
+    <string name="fair_and_warm">Fair &amp; Warm</string>
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="hazy">Hazy</string>
+    <string name="slightly_hazy">Slightly Hazy</string>
+    <string name="windy">Windy</string>
+    <string name="mist">Mist</string>
+    <string name="light_rain">Light Rain</string>
+    <string name="moderate_rain">Moderate Rain</string>
+    <string name="heavy_rain">Heavy Rain</string>
+    <string name="passing_showers">Passing Showers</string>
+    <string name="light_showers">Light Showers</string>
+    <string name="showers">Showers</string>
+    <string name="heavy_showers">Heavy Showers</string>
+    <string name="thundery_showers">Thundery Showers</string>
+    <string name="heavy_thundery_showers">Heavy Thundery Showers</string>
+    <string name="heavy_thundery_showers_with_gusty_winds">Heavy Thundery Showers with Gusty Winds</string>
+    <string name="weather_error">Unable to load</string>
+
 </resources>

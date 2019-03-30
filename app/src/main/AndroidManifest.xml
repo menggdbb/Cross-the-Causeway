@@ -24,8 +24,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.MoneyChangerActivity"
-            android:label="@string/title_activity_money_changer"></activity>
+            android:name=".activities.MoneyChangerActivity">
+            <!--android:label="@string/title_activity_money_changer">-->
+        </activity>
         <activity android:name=".activities.WoodlandsTrafficImageActivity" />
         <activity android:name=".activities.TuasTrafficImageActivity" />
         <activity android:name=".activities.CurrencyActivity" />

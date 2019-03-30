@@ -49,6 +49,7 @@
             android:layout_width="100dp"
             android:layout_height="37dp"
             android:layout_alignBottom="@+id/woodlands_home_image"
+            android:layout_centerHorizontal="true"
             android:layout_toStartOf="@+id/tuas_button"
             android:text="Woodlands"
             android:textSize="12sp" />
@@ -60,22 +61,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/traffic_image_layout"
-        android:layout_toStartOf="@+id/center">
+        android:layout_toStartOf="@+id/center"
+        android:background="@color/red">
 
         <TextView
-            android:id="@+id/text1"
+            android:id="@+id/woodlands"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_above="@+id/woodlands_weather_image"
+            android:layout_centerHorizontal="true"
             android:text="Woodlands"
+            android:textColor="@color/white"
             android:textSize="28sp"/>
+
+        <ImageView
+            android:id="@+id/woodlands_weather_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/rain"/>
 
         <TextView
             android:id="@+id/woodlands_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text1"
-            android:textSize="28sp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/woodlands_weather_image"
+            android:textSize="28sp"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
@@ -93,22 +106,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/center"
-        android:layout_below="@+id/traffic_image_layout">
+        android:layout_below="@+id/traffic_image_layout"
+        android:background="@color/red">
 
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/tuas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_above="@id/tuas_weather_image"
+            android:layout_centerHorizontal="true"
             android:text="Tuas"
-            android:textSize="28sp"/>
+            android:textSize="28sp"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/tuas_weather_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/rain"/>
 
         <TextView
             android:id="@+id/tuas_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text2"
-            android:textSize="28sp"/>
+            android:layout_below="@id/tuas_weather_image"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
