@@ -25,4 +25,9 @@
     <string name="heavy_thundery_showers_with_gusty_winds">Heavy Thundery Showers with Gusty Winds</string>
     <string name="weather_error">Unable to load</string>
 
+
+    <string name="app_name">GoJbBoh</string>
+    <string name="menu">menu</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_money_changer">Location</string>
 </resources>
