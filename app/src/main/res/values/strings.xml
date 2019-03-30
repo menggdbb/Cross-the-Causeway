@@ -25,6 +25,14 @@
     <string name="heavy_thundery_showers_with_gusty_winds">Heavy Thundery Showers with Gusty Winds</string>
     <string name="weather_error">Unable to load</string>
 
+    <!--traffic image camera id-->
+    <string name="woodlands_causeway">Woodlands Causeway</string>
+    <string name="woodlands_checkpoint">Woodlands Checkpoint</string>
+    <string name="woodlands_flyover">Woodlands Flyover</string>
+    <string name="tuas_second_link">Tuas Second Link</string>
+    <string name="tuas_checkpoint">Tuas Checkpoint</string>
+    <string name="after_tuas_west_road">After Tuas West Road</string>
+
     <!--home page strings-->
     <string name="woodlands_title">Woodlands</string>
     <string name="tuas_title">Tuas</string>

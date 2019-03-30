@@ -30,20 +30,20 @@ public class CalendarActivity extends AppCompatActivity {
         TextView nextNextHol = findViewById(R.id.nextNextHoliday);
         TextView pubHol = findViewById(R.id.p_hol_name);
         date1.setText(currentDate);
-/*
-        //Calendar colour change on public holidays
-        int i = 0;
-        while (i < pHol_date.length){
-            if (pHol_date[i] == currentDate) {
-                date1.setTextColor(0xffff0000);
-                pubHol.setText(pHol[i]);
-                nextHol.setText(pHol[i+1]);
-                nextNextHol.setText(pHol[i+2]);
-                i++;
-            } else
-                date1.setTextColor(0xff000000);
 
-        }
-*/
+//        //Calendar colour change on public holidays
+//        int i = 0;
+//        while (i < pHol_date.length){
+//            if (pHol_date[i] == currentDate) {
+//                date1.setTextColor(0xffff0000);
+//                pubHol.setText(pHol[i]);
+//                nextHol.setText(pHol[i+1]);
+//                nextNextHol.setText(pHol[i+2]);
+//                i++;
+//            } else
+//                date1.setTextColor(0xff000000);
+//
+//        }
+
     }
 }

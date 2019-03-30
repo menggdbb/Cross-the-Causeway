@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.entity.TrafficObject;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
 public class TuasTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
@@ -24,8 +25,6 @@ public class TuasTrafficImageActivity extends AppCompatActivity implements Traff
         imageView1 = findViewById(R.id.image_view1);
         imageView2 = findViewById(R.id.image_view2);
         imageView3 = findViewById(R.id.image_view3);
-        imageView4 = findViewById(R.id.image_view4);
-        imageView5 = findViewById(R.id.image_view5);
 
         new TrafficImageAsyncTask(this).execute();
     }
@@ -34,11 +33,9 @@ public class TuasTrafficImageActivity extends AppCompatActivity implements Traff
     public void onPreExecuteTrafficTask() {}
 
     @Override
-    public void onPostExecuteTrafficTask(String[] result) {
-        Picasso.with(this).load(result[0]).into(imageView1);
-        Picasso.with(this).load(result[1]).into(imageView2);
-        Picasso.with(this).load(result[2]).into(imageView3);
-        Picasso.with(this).load(result[3]).into(imageView4);
-        Picasso.with(this).load(result[4]).into(imageView5);
+    public void onPostExecuteTrafficTask(TrafficObject[] result) {
+        Picasso.with(this).load(result[0].getImageUrl()).into(imageView1);
+        Picasso.with(this).load(result[1].getImageUrl()).into(imageView2);
+        Picasso.with(this).load(result[2].getImageUrl()).into(imageView3);
     }
 }

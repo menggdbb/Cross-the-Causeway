@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.entity.TrafficObject;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 import com.tehosiewdai.gojbboh.utilities.WeatherAsyncTask;
 
@@ -106,18 +107,23 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onPostExecuteTrafficTask(String[] result) {
+    public void onPostExecuteTrafficTask(TrafficObject[] result) {
         loadingIndicator.setVisibility(View.INVISIBLE);
-        Picasso
-                .with(this)
-                .load(result[1])
-                .placeholder(R.drawable.fff)
-                .into(woodlandsHomeImage);
-        Picasso
-                .with(this)
-                .load(result[3])
-                .placeholder(R.drawable.fff)
-                .into(tuasHomeImage);
+        for (TrafficObject trafficObject : result) {
+            if (trafficObject.getCameraId().equals("1702")) {
+                Picasso
+                        .with(this)
+                        .load(trafficObject.getImageUrl())
+                        .placeholder(R.drawable.fff)
+                        .into(woodlandsHomeImage);
+            } else if (trafficObject.getCameraId().equals("1705")) {
+                Picasso
+                        .with(this)
+                        .load(trafficObject.getImageUrl())
+                        .placeholder(R.drawable.fff)
+                        .into(tuasHomeImage);
+            }
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.entity.TrafficObject;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
 public class WoodlandsTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
@@ -13,8 +14,6 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
     private ImageView imageView6;
     private ImageView imageView7;
     private ImageView imageView8;
-    private ImageView imageView9;
-    private ImageView imageView10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +23,6 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
         imageView6 = findViewById(R.id.image_view6);
         imageView7 = findViewById(R.id.image_view7);
         imageView8 = findViewById(R.id.image_view8);
-        imageView9 = findViewById(R.id.image_view9);
-        imageView10 = findViewById(R.id.image_view10);
 
         new TrafficImageAsyncTask(this).execute();
     }
@@ -34,11 +31,9 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
     public void onPreExecuteTrafficTask() {}
 
     @Override
-    public void onPostExecuteTrafficTask(String[] result) {
-        Picasso.with(this).load(result[5]).into(imageView6);
-        Picasso.with(this).load(result[6]).into(imageView7);
-        Picasso.with(this).load(result[7]).into(imageView8);
-        Picasso.with(this).load(result[8]).into(imageView9);
-        Picasso.with(this).load(result[9]).into(imageView10);
+    public void onPostExecuteTrafficTask(TrafficObject[] result) {
+        Picasso.with(this).load(result[3].getImageUrl()).into(imageView6);
+        Picasso.with(this).load(result[4].getImageUrl()).into(imageView7);
+        Picasso.with(this).load(result[5].getImageUrl()).into(imageView8);
     }
 }

@@ -3,6 +3,9 @@ package com.tehosiewdai.gojbboh.utilities;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.entity.TrafficObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,12 +13,15 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
-public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
+public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]> {
 
     private final String TAG = this.getClass().getSimpleName();
 
     private final String TRAFFIC_URL = "https://api.data.gov.sg/v1/transport/traffic-images";
+    //TODO find the camera ids
+    private String[] cameraIds = {"1701", "1702", "1704", "1705", "1706", "1707"};
 
     private TrafficImageTaskCallback callback;
 
@@ -32,7 +38,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
     }
 
     @Override
-    protected String[] doInBackground(Void... voids) {
+    protected TrafficObject[] doInBackground(Void... voids) {
         try {
             URL url = new URL(TRAFFIC_URL);
             String results = NetworkUtils.getResponseFromHttpUrl(url);
@@ -48,16 +54,16 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
     }
 
     @Override
-    protected void onPostExecute(String[] result) {
+    protected void onPostExecute(TrafficObject[] result) {
         if (callback != null && result != null){
             callback.onPostExecuteTrafficTask(result);
         }
     }
 
-    private String[] parseJSON(String results) throws JSONException {
+    private TrafficObject[] parseJSON(String results) throws JSONException {
 
-        String[] urlArray = new String[10];
-
+        TrafficObject[] trafficObjects = new TrafficObject[cameraIds.length];
+        int counter = 0;
         JSONArray cameras = null;
 
         try {
@@ -70,35 +76,28 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, String[]> {
         }
         if (cameras != null){
             for(int i=0; i < cameras.length(); i++) {
-                if (cameras.getJSONObject(i).get("camera_id").equals("1701")) {
-                    urlArray[0] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1702")) {
-                    urlArray[1] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1704")) {
-                    urlArray[2] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1705")) {
-                    urlArray[3] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1706")) {
-                    urlArray[4] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1707")) {
-                    urlArray[5] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1709")) {
-                    urlArray[6] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("1711")) {
-                    urlArray[7] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("2701")) {
-                    urlArray[8] = (String) cameras.getJSONObject(i).get("image");
-                } else if (cameras.getJSONObject(i).get("camera_id").equals("2702")) {
-                    urlArray[9] = (String) cameras.getJSONObject(i).get("image");
+                if (counter == cameraIds.length){
+                    break;
                 }
+
+                if (Arrays.asList(cameraIds).contains((String) cameras.getJSONObject(i).get("camera_id"))){
+                    trafficObjects[counter] = new TrafficObject(
+                            (String) cameras.getJSONObject(i).get("camera_id"),
+                            (String) cameras.getJSONObject(i).get("image"),
+                            //TODO display nicer date function
+                            (String) cameras.getJSONObject(i).get("timestamp"));
+                    counter++;
+                }
+
             }
         }
 
-        return urlArray;
+        return trafficObjects;
     }
+
 
     public interface TrafficImageTaskCallback {
         void onPreExecuteTrafficTask();
-        void onPostExecuteTrafficTask(String[] result);
+        void onPostExecuteTrafficTask(TrafficObject[] result);
     }
 }
