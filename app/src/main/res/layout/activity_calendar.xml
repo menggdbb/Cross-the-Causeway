@@ -34,15 +34,15 @@
             tools:layout_editor_absoluteY="162dp" />
 
         <TextView
+            android:id="@+id/p_hol_name"
             android:layout_width="272dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Weekday"
-            android:gravity="center"
-            android:layout_margin="15dp"
-            android:textSize="30sp"
             android:layout_below="@id/date_1"
-            />
+            android:layout_centerInParent="true"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="30sp" />
 
     </RelativeLayout>
 
