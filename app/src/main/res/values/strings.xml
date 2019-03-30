@@ -25,9 +25,10 @@
     <string name="heavy_thundery_showers_with_gusty_winds">Heavy Thundery Showers with Gusty Winds</string>
     <string name="weather_error">Unable to load</string>
 
+    <!--home page strings-->
+    <string name="woodlands_title">Woodlands</string>
+    <string name="tuas_title">Tuas</string>
 
-    <string name="app_name">GoJbBoh</string>
-    <string name="menu">menu</string>
-    <string name="title_activity_menu">MenuActivity</string>
+    <!--money changer activity-->
     <string name="title_activity_money_changer">Location</string>
 </resources>
