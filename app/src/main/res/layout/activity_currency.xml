@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.CurrencyActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/currency_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="currency page"
-        android:textSize="30sp"/>
-
-    <Button
-        android:id="@+id/convert"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Convert"/>
+        android:layout_above="@id/switchConvert">
+
+        <EditText
+            android:id="@+id/SGD_edit_text"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/SGD"
+            android:inputType="numberDecimal"
+            android:singleLine="false"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/SGD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="SGD"
+            android:textSize="100sp" />
+
+    </RelativeLayout>
 
     <ToggleButton
         android:id="@+id/switchConvert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/exchangeRate"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="320dp"
+        android:layout_marginBottom="35dp"
         android:textOff="SGD to MYR"
         android:textOn="MYR to SGD" />
 
     <TextView
         android:id="@+id/exchangeRate"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@id/convert"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginTop="-33dp"
         android:gravity="center"
         android:text="SGD to MYR"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/SGD"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="200dp"
-        android:inputType="numberDecimal"
-        android:singleLine="false"
-        android:text="0" />
-
-    <TextView
+    <Button
+        android:id="@+id/convert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SGD"
-        android:textSize="100sp"
-        android:layout_alignBaseline="@id/SGD"
-        android:layout_marginLeft="177dp"/>
+        android:layout_below="@id/exchangeRate"
+        android:layout_centerHorizontal="true"
+        android:text="Convert" />
 
-    <EditText
-        android:id="@+id/MYR"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="240dp"
-        android:layout_marginTop="420dp"
-        android:inputType="numberDecimal"
-        android:text="0" />
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MYR"
-        android:textSize="100sp"
-        android:layout_alignBaseline="@id/MYR" />
+        android:layout_below="@id/convert">
 
+        <TextView
+            android:id="@+id/MYR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MYR"
+            android:textSize="100sp" />
+
+        <EditText
+            android:id="@+id/MYR_edit_text"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/MYR"
+            android:layout_alignBottom="@+id/MYR"
+            android:inputType="numberDecimal"
+            android:text="0" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
