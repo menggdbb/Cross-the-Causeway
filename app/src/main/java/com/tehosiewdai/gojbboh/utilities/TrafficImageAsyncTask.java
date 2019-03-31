@@ -3,7 +3,6 @@ package com.tehosiewdai.gojbboh.utilities;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.tehosiewdai.gojbboh.R;
 import com.tehosiewdai.gojbboh.entity.TrafficObject;
 
 import org.json.JSONArray;
@@ -84,7 +83,6 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
                     trafficObjects[counter] = new TrafficObject(
                             (String) cameras.getJSONObject(i).get("camera_id"),
                             (String) cameras.getJSONObject(i).get("image"),
-                            //TODO display nicer date function
                             formatDatetime((String) cameras.getJSONObject(i).get("timestamp")));
                     counter++;
                 }
