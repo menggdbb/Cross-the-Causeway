@@ -41,4 +41,6 @@
     <string name="sgd">SGD</string>
     <string name="myr">MYR</string>
 
+    <string name="google_maps_key">AIzaSyAX2VOrsCskPZEaG6tJJvtQUlaC1BXqE9c</string>
+
 </resources>
