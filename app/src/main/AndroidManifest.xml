@@ -44,7 +44,11 @@
         </activity>
         <activity
             android:name=".activities.CurrencyActivity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+            android:parentActivityName=".activities.MenuActivity"/>
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".activities.MenuActivity" />
         <activity android:name=".activities.CalendarActivity" />
         <activity
             android:name=".activities.MenuActivity"

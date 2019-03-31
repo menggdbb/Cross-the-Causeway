@@ -1,8 +1,8 @@
 package com.tehosiewdai.gojbboh.activities;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -17,7 +17,7 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
     private EditText sgdInput;
     private EditText myrInput;
 
-    private double rate;
+    private double rate = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
                 if (editable != null) {
                     if (sgdInput.getText().hashCode() == editable.hashCode()) {
                         myrInput.removeTextChangedListener(this);
-                        if (editable.toString().equalsIgnoreCase("")){
+                        if (editable.toString().equalsIgnoreCase("")) {
                             myrInput.setText("");
                         } else {
                             double value = Double.valueOf(editable.toString()) * rate;
@@ -56,7 +56,7 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
                         myrInput.addTextChangedListener(this);
                     } else if (myrInput.getText().hashCode() == editable.hashCode()) {
                         sgdInput.removeTextChangedListener(this);
-                        if (editable.toString().equalsIgnoreCase("")){
+                        if (editable.toString().equalsIgnoreCase("")) {
                             sgdInput.setText("");
                         } else {
                             double value = Double.valueOf(editable.toString()) / rate;
@@ -74,12 +74,14 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
 
 
     @Override
-    public void onPreExecuteCurrencyTask() {}
+    public void onPreExecuteCurrencyTask() {
+    }
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onPostExecuteCurrencyTask(double result) {
         rate = result;
-        exchangeRate.setText("1SGD = " +String.format("%.2f", result) + "MYR");
+        exchangeRate.setText("1SGD = " + String.format("%.2f", result) + "MYR");
     }
 
 }

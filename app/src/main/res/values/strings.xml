@@ -33,8 +33,12 @@
     <string name="tuas_checkpoint">Tuas Checkpoint</string>
     <string name="after_tuas_west_road">After Tuas West Road</string>
 
-    <!--home page strings-->
+    <!--location strings-->
     <string name="woodlands_title">Woodlands</string>
     <string name="tuas_title">Tuas</string>
+
+    <!--currency strings-->
+    <string name="sgd">SGD</string>
+    <string name="myr">MYR</string>
 
 </resources>

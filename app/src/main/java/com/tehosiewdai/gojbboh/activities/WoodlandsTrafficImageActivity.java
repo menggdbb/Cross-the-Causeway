@@ -1,7 +1,7 @@
 package com.tehosiewdai.gojbboh.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -47,7 +47,8 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void onPreExecuteTrafficTask() {}
+    public void onPreExecuteTrafficTask() {
+    }
 
     @Override
     public void onPostExecuteTrafficTask(TrafficObject[] result) {
@@ -56,14 +57,14 @@ public class WoodlandsTrafficImageActivity extends AppCompatActivity implements 
         info2.setVisibility(View.VISIBLE);
         info3.setVisibility(View.VISIBLE);
 
-        for (TrafficObject trafficObject : result){
-            if (trafficObject.getCameraId().equals("2701")){
+        for (TrafficObject trafficObject : result) {
+            if (trafficObject.getCameraId().equals("2701")) {
                 Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image1);
                 datetime1.setText(trafficObject.getDatetime());
-            } else if (trafficObject.getCameraId().equals("2702")){
+            } else if (trafficObject.getCameraId().equals("2702")) {
                 Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image2);
                 datetime2.setText(trafficObject.getDatetime());
-            } else if (trafficObject.getCameraId().equals("2704")){
+            } else if (trafficObject.getCameraId().equals("2704")) {
                 Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image3);
                 datetime3.setText(trafficObject.getDatetime());
             }

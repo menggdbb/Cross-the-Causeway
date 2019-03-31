@@ -14,17 +14,14 @@ import com.tehosiewdai.gojbboh.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private ImageView calendarImage;
-    private ImageView exchangeImage;
-    private ImageView locationImage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        calendarImage = (ImageView) findViewById(R.id.calendar_image);
-        exchangeImage = (ImageView) findViewById(R.id.exchange_image);
-        locationImage = (ImageView) findViewById(R.id.location_image);
+
+        ImageView calendarImage = findViewById(R.id.calendar_image);
+        ImageView exchangeImage = findViewById(R.id.exchange_image);
+        ImageView locationImage = findViewById(R.id.location_image);
 
         ActionBar actionBar = this.getSupportActionBar();
 

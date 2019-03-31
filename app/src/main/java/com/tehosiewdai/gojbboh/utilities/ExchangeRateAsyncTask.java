@@ -45,7 +45,7 @@ public class ExchangeRateAsyncTask extends AsyncTask<Void, Void, Double> {
         } catch (IOException e) {
             Log.e(TAG, String.valueOf(e));
         } catch (JSONException e) {
-            Log.e(TAG, String.valueOf(e));;
+            Log.e(TAG, String.valueOf(e));
         }
 
         return 0.0;

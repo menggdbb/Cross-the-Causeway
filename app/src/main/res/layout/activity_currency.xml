@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activities.CurrencyActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:layout_above="@id/exchangeRate">
+        android:layout_above="@id/exchangeRate"
+        android:layout_marginBottom="70dp">
 
         <EditText
             android:id="@+id/SGD_edit_text"
@@ -17,7 +19,7 @@
             android:layout_toStartOf="@id/SGD"
             android:inputType="numberDecimal"
             android:singleLine="false"
-            android:text="0" />
+            tools:ignore="Autofill,LabelFor" />
 
         <TextView
             android:id="@+id/SGD"
@@ -25,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:text="SGD"
+            android:text="@string/sgd"
             android:textSize="100sp" />
 
     </RelativeLayout>
@@ -37,7 +39,6 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="-33dp"
         android:gravity="center"
-        android:text="SGD to MYR"
         android:textSize="15sp" />
 
     <RelativeLayout
@@ -49,17 +50,17 @@
             android:id="@+id/MYR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MYR"
+            android:text="@string/myr"
             android:textSize="100sp" />
 
         <EditText
             android:id="@+id/MYR_edit_text"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_toEndOf="@+id/MYR"
             android:layout_alignBottom="@+id/MYR"
+            android:layout_toEndOf="@+id/MYR"
             android:inputType="numberDecimal"
-            android:text="0" />
+            tools:ignore="Autofill,LabelFor" />
 
     </RelativeLayout>
 
