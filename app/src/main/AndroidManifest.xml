@@ -42,7 +42,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
         </activity>
-        <activity android:name=".activities.CurrencyActivity" />
+        <activity
+            android:name=".activities.CurrencyActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
         <activity android:name=".activities.CalendarActivity" />
         <activity
             android:name=".activities.MenuActivity"

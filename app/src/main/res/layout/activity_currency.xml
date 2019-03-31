@@ -6,7 +6,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/switchConvert">
+        android:layout_marginBottom="70dp"
+        android:layout_above="@id/exchangeRate">
 
         <EditText
             android:id="@+id/SGD_edit_text"
@@ -29,16 +30,6 @@
 
     </RelativeLayout>
 
-    <ToggleButton
-        android:id="@+id/switchConvert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/exchangeRate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
-        android:textOff="SGD to MYR"
-        android:textOn="MYR to SGD" />
-
     <TextView
         android:id="@+id/exchangeRate"
         android:layout_width="wrap_content"
@@ -49,18 +40,10 @@
         android:text="SGD to MYR"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/convert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/exchangeRate"
-        android:layout_centerHorizontal="true"
-        android:text="Convert" />
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/convert">
+        android:layout_below="@id/exchangeRate">
 
         <TextView
             android:id="@+id/MYR"

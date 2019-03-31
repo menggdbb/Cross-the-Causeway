@@ -1,54 +1,85 @@
 package com.tehosiewdai.gojbboh.activities;
 
-import android.support.design.widget.TextInputEditText;
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.utilities.ConvertCurrency;
-import com.tehosiewdai.gojbboh.utilities.FetchData;
+import com.tehosiewdai.gojbboh.utilities.ExchangeRateAsyncTask;
 
-public class CurrencyActivity extends AppCompatActivity implements FetchData.FetchDataCall {
-    Button click;
-    public static ToggleButton change;
-    public static TextView data;
-    public static EditText SGDinput;
-    public static EditText MYRinput;
+public class CurrencyActivity extends AppCompatActivity implements ExchangeRateAsyncTask.CurrencyTaskCallback {
 
+    private TextView exchangeRate;
+    private EditText sgdInput;
+    private EditText myrInput;
+
+    private double rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency);
 
-        click = findViewById(R.id.convert);
-        data = findViewById(R.id.exchangeRate);
-        change = findViewById(R.id.switchConvert);
-        SGDinput = findViewById(R.id.SGD);
-        MYRinput = findViewById(R.id.MYR);
-    new FetchData(this).execute();
-        click.setOnClickListener(new View.OnClickListener(){
+        exchangeRate = findViewById(R.id.exchangeRate);
+
+        sgdInput = findViewById(R.id.SGD_edit_text);
+        myrInput = findViewById(R.id.MYR_edit_text);
+
+
+        new ExchangeRateAsyncTask(this).execute();
+
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void onClick(View view){
-                ConvertCurrency convert = new ConvertCurrency();
-                convert.execute();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
-        });
-    };
 
-    @Override
-    public void onPreExecuteFetchData() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @SuppressLint("DefaultLocale")
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable != null) {
+                    if (sgdInput.getText().hashCode() == editable.hashCode()) {
+                        myrInput.removeTextChangedListener(this);
+                        if (editable.toString().equalsIgnoreCase("")){
+                            myrInput.setText("");
+                        } else {
+                            double value = Double.valueOf(editable.toString()) * rate;
+                            myrInput.setText(String.format("%.2f", value));
+                        }
+                        myrInput.addTextChangedListener(this);
+                    } else if (myrInput.getText().hashCode() == editable.hashCode()) {
+                        sgdInput.removeTextChangedListener(this);
+                        if (editable.toString().equalsIgnoreCase("")){
+                            sgdInput.setText("");
+                        } else {
+                            double value = Double.valueOf(editable.toString()) / rate;
+                            sgdInput.setText(String.format("%.2f", value));
+                        }
+                        sgdInput.addTextChangedListener(this);
+                    }
+                }
+            }
+        };
+
+        sgdInput.addTextChangedListener(textWatcher);
+        myrInput.addTextChangedListener(textWatcher);
     }
 
+
     @Override
-    public void onPostExecuteFetchData(String result) {
-        data.setText(result);
+    public void onPreExecuteCurrencyTask() {}
+
+    @Override
+    public void onPostExecuteCurrencyTask(double result) {
+        rate = result;
+        exchangeRate.setText("1SGD = " +String.format("%.2f", result) + "MYR");
     }
 
 }
