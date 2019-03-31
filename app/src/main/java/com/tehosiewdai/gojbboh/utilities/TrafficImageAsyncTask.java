@@ -20,8 +20,8 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
     private final String TAG = this.getClass().getSimpleName();
 
     private final String TRAFFIC_URL = "https://api.data.gov.sg/v1/transport/traffic-images";
-    //TODO find the camera ids
-    private String[] cameraIds = {"1701", "1702", "1704", "1705", "1706", "1707"};
+
+    private String[] cameraIds = {"2701", "2702", "2704", "4712", "4713", "4703"};
 
     private TrafficImageTaskCallback callback;
 
@@ -85,7 +85,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
                             (String) cameras.getJSONObject(i).get("camera_id"),
                             (String) cameras.getJSONObject(i).get("image"),
                             //TODO display nicer date function
-                            (String) cameras.getJSONObject(i).get("timestamp"));
+                            formatDatetime((String) cameras.getJSONObject(i).get("timestamp")));
                     counter++;
                 }
 
@@ -93,6 +93,18 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
         }
 
         return trafficObjects;
+    }
+
+    private String formatDatetime(String datetime){
+        String date = datetime.substring(0,10);
+        String time;
+        if (Integer.valueOf(datetime.substring(11,13)) < 13 ){
+            time = datetime.substring(11,16) + "am";
+        } else {
+            int hour = Integer.valueOf(datetime.substring(11,13));
+            time = (hour - 12) + datetime.substring(13,16) + "pm";
+        }
+        return date + " " + time;
     }
 
 

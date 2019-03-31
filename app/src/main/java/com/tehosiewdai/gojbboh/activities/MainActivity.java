@@ -110,13 +110,13 @@ public class MainActivity extends AppCompatActivity implements
     public void onPostExecuteTrafficTask(TrafficObject[] result) {
         loadingIndicator.setVisibility(View.INVISIBLE);
         for (TrafficObject trafficObject : result) {
-            if (trafficObject.getCameraId().equals("1702")) {
+            if (trafficObject.getCameraId().equals("2701")) {
                 Picasso
                         .with(this)
                         .load(trafficObject.getImageUrl())
                         .placeholder(R.drawable.fff)
                         .into(woodlandsHomeImage);
-            } else if (trafficObject.getCameraId().equals("1705")) {
+            } else if (trafficObject.getCameraId().equals("4703")) {
                 Picasso
                         .with(this)
                         .load(trafficObject.getImageUrl())

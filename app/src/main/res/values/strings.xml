@@ -25,7 +25,7 @@
     <string name="heavy_thundery_showers_with_gusty_winds">Heavy Thundery Showers with Gusty Winds</string>
     <string name="weather_error">Unable to load</string>
 
-    <!--traffic image camera id-->
+    <!--traffic image camera-->
     <string name="woodlands_causeway">Woodlands Causeway</string>
     <string name="woodlands_checkpoint">Woodlands Checkpoint</string>
     <string name="woodlands_flyover">Woodlands Flyover</string>

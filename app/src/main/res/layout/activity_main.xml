@@ -69,14 +69,14 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:id="@+id/woodlands"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:text="@string/woodlands_title"
             android:textColor="@color/white"
             android:textSize="28sp" />
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:text="@string/tuas_title"
             android:textColor="@color/white"
             android:textSize="28sp" />

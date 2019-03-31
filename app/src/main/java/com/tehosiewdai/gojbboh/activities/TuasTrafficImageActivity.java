@@ -2,7 +2,10 @@ package com.tehosiewdai.gojbboh.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
@@ -11,20 +14,34 @@ import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
 public class TuasTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
 
-    private ImageView imageView1;
-    private ImageView imageView2;
-    private ImageView imageView3;
-    private ImageView imageView4;
-    private ImageView imageView5;
+    private ImageView image1;
+    private ImageView image2;
+    private ImageView image3;
+
+    private TextView datetime1;
+    private TextView datetime2;
+    private TextView datetime3;
+
+    private RelativeLayout info1;
+    private RelativeLayout info2;
+    private RelativeLayout info3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuas_traffic_image);
 
-        imageView1 = findViewById(R.id.image_view1);
-        imageView2 = findViewById(R.id.image_view2);
-        imageView3 = findViewById(R.id.image_view3);
+        image1 = findViewById(R.id.tuas_image_1);
+        image2 = findViewById(R.id.tuas_image_2);
+        image3 = findViewById(R.id.tuas_image_3);
+
+        datetime1 = findViewById(R.id.tuas_image_1_datetime);
+        datetime2 = findViewById(R.id.tuas_image_2_datetime);
+        datetime3 = findViewById(R.id.tuas_image_3_datetime);
+
+        info1 = findViewById(R.id.tuas_image_1_info);
+        info2 = findViewById(R.id.tuas_image_2_info);
+        info3 = findViewById(R.id.tuas_image_3_info);
 
         new TrafficImageAsyncTask(this).execute();
     }
@@ -34,8 +51,22 @@ public class TuasTrafficImageActivity extends AppCompatActivity implements Traff
 
     @Override
     public void onPostExecuteTrafficTask(TrafficObject[] result) {
-        Picasso.with(this).load(result[0].getImageUrl()).into(imageView1);
-        Picasso.with(this).load(result[1].getImageUrl()).into(imageView2);
-        Picasso.with(this).load(result[2].getImageUrl()).into(imageView3);
+
+        info1.setVisibility(View.VISIBLE);
+        info2.setVisibility(View.VISIBLE);
+        info3.setVisibility(View.VISIBLE);
+
+        for (TrafficObject trafficObject : result){
+            if (trafficObject.getCameraId().equals("4703")){
+                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image1);
+                datetime1.setText(trafficObject.getDatetime());
+            } else if (trafficObject.getCameraId().equals("4713")){
+                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image2);
+                datetime2.setText(trafficObject.getDatetime());
+            } else if (trafficObject.getCameraId().equals("4712")){
+                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image3);
+                datetime3.setText(trafficObject.getDatetime());
+            }
+        }
     }
 }
