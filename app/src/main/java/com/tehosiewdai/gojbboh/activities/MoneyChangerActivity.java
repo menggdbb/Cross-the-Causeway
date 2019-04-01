@@ -62,11 +62,17 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(20.0f);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(1.35, 103.8)));
 
-        //final LatLngBounds Singapore = new LatLngBounds(
-        //        new LatLng(1.20, 103.60), new LatLng(1.50, 104.00));
-        
+        final LatLngBounds SINGAPORE = new LatLngBounds(
+                new LatLng(1.152761, 103.559083), new LatLng(1.487512, 104.113698));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(SINGAPORE, 1));
+        //new LatLng(1.35, 103.8
+        final LatLngBounds Singapore = new LatLngBounds(
+                new LatLng(1.152761, 103.559083), new LatLng(1.487512, 104.113698));
+
+
+
         try {
             KmlLayer layer = new KmlLayer(mMap, R.raw.locations_of_money_changer_kml, getApplicationContext());
             layer.addLayerToMap();
@@ -87,6 +93,5 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
             e.printStackTrace();
         }
     }
-
 
 }
