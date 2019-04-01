@@ -25,13 +25,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.entity.MoneyChanger;
 import com.tehosiewdai.gojbboh.utilities.MoneyChangerAsyncTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -63,7 +59,6 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         mapButtonClick = findViewById(R.id.buttonMaps);
-
 
 
     }
@@ -137,34 +132,20 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
 
     @Override
     public void onPreExecuteMoneyChangerTask() {
-
     }
 
     @Override
-    public void onPostExecuteMoneyChangerTask(JSONObject jsonObject) {
-        try {
-            JSONArray features = jsonObject.getJSONArray("features");
-            for (int i = 0; i < features.length(); i++) {
-                JSONObject feature = features.getJSONObject(i);
-                double lat = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
-                double lng = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
-                String title = feature.getJSONObject("properties").getString("Name");
-                String description = feature.getJSONObject("properties").getString("Description");
-
-                Marker marker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(lat, lng))
-                        .title(title)
-                        .snippet(description));
-
-                mMarkerArray.add(marker);
-            }
-        } catch (JSONException e) {
-            Log.e("TAG", String.valueOf(e));
+    public void onPostExecuteMoneyChangerTask(MoneyChanger[] moneyChangers) {
+        for (MoneyChanger moneyChanger : moneyChangers) {
+            Marker marker = mMap.addMarker(new MarkerOptions()
+                    .position(moneyChanger.getLatLng())
+                    .title(moneyChanger.getName())
+                    .snippet(moneyChanger.getAddress()));
+            mMarkerArray.add(marker);
         }
     }
 
-    public void buttonClick(View v)
-    {
+    public void buttonClick(View v) {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -175,7 +156,8 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(findNearest(location), 14.0f));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(findNearest(location)));
+                        mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
                     }
                 }
             });
@@ -183,23 +165,26 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
 
     }
 
-    private LatLng findNearest(Location myLoc){
-        LatLng nearestLoc = new LatLng(0,0);
+    private LatLng findNearest(Location myLoc) {
+        LatLng nearestLoc = new LatLng(0, 0);
         LatLng myLatLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
         Marker nearestMark = null;
         Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
 
         for (Marker marker : mMarkerArray) {
             LatLng temp = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
-            Log.d("tag", "latlng = " + temp.latitude + ", " + temp.longitude );
-            if (getDistance(temp, myLatLng) <= getDistance(nearestLoc, myLatLng)){
+            Log.d(TAG, "latlng = " + temp.latitude + ", " + temp.longitude);
+            if (getDistance(temp, myLatLng) <= getDistance(nearestLoc, myLatLng)) {
                 nearestLoc = temp;
+                Log.d(TAG, "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
                 Log.d("tag", "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
                 nearestMark = marker;
             }
         }
-        Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
+        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
 
+        Log.d(TAG, "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
         Log.d("tag", "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
         if (nearestMark != null){
             nearestMark.showInfoWindow();
@@ -216,7 +201,7 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         locationB.setLatitude(LatLng2.latitude);
         locationB.setLongitude(LatLng2.longitude);
         distance = locationA.distanceTo(locationB);
-        Log.d("tag", "distance = " + distance );
+        Log.d(TAG, "distance = " + distance);
         return distance;
     }
 }

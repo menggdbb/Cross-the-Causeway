@@ -1,8 +1,12 @@
 package com.tehosiewdai.gojbboh.utilities;
 
 import android.os.AsyncTask;
+import android.text.Html;
 import android.util.Log;
 
+import com.tehosiewdai.gojbboh.entity.MoneyChanger;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,7 +14,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, JSONObject> {
+public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, MoneyChanger[]> {
 
     private static final String TAG = MoneyChangerAsyncTask.class.getSimpleName();
 
@@ -31,31 +35,68 @@ public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, JSONObject> {
     }
 
     @Override
-    protected JSONObject doInBackground(Void... voids) {
+    protected MoneyChanger[] doInBackground(Void... voids) {
         try {
             URL url = new URL(MONEY_CHANGER_LOCATION_URL);
-            String results = NetworkUtils.getResponseFromHttpUrl(url);
-            return new JSONObject(results);
+            String result = NetworkUtils.getResponseFromHttpUrl(url);
+            return parseJSON(result);
         } catch (MalformedURLException e) {
             Log.e(TAG, String.valueOf(e));
         } catch (IOException e) {
-            Log.e(TAG, String.valueOf(e));
-        } catch (JSONException e) {
             Log.e(TAG, String.valueOf(e));
         }
         return null;
     }
 
     @Override
-    protected void onPostExecute(JSONObject jsonObject) {
-        if (callback != null && jsonObject != null) {
-            callback.onPostExecuteMoneyChangerTask(jsonObject);
+    protected void onPostExecute(MoneyChanger[] moneyChangers) {
+        if (callback != null && moneyChangers != null) {
+            callback.onPostExecuteMoneyChangerTask(moneyChangers);
         }
     }
+
+    private MoneyChanger[] parseJSON(String results){
+
+        JSONArray features = null;
+        MoneyChanger[] moneyChangers = null;
+
+        try {
+            JSONObject moneyChangerObject = new JSONObject(results);
+            features = moneyChangerObject.getJSONArray("features");
+        } catch (JSONException e) {
+            Log.e(TAG, String.valueOf(e));
+        }
+
+        if (features != null) {
+            moneyChangers = new MoneyChanger[features.length()];
+            int counter = 0;
+            for (int i = 0; i < features.length(); i++) {
+                JSONObject feature = null;
+                try {
+                    feature = features.getJSONObject(i);
+                    double lat = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
+                    double lng = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
+                    String title = feature.getJSONObject("properties").getString("Name");
+                    String description = Html.fromHtml(feature.getJSONObject("properties").getString("Description")).toString();
+
+                    moneyChangers[counter] = new MoneyChanger(lat, lng, title, description, "k");
+                    counter++;
+
+                } catch (JSONException e) {
+                    Log.e(TAG,String.valueOf(e));
+                }
+
+            }
+        }
+
+        return moneyChangers;
+    }
+
+
 
     public interface MoneyChangerTaskCallback {
         void onPreExecuteMoneyChangerTask();
 
-        void onPostExecuteMoneyChangerTask(JSONObject jsonObject);
+        void onPostExecuteMoneyChangerTask(MoneyChanger[] moneyChangers);
     }
 }
