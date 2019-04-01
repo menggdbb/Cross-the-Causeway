@@ -55,6 +55,7 @@
         </activity>
         <activity
             android:name=".activities.CurrencyActivity"
+            android:label="@string/currency_exchange_title"
             android:parentActivityName=".activities.MenuActivity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
 

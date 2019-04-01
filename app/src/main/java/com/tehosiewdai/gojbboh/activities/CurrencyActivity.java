@@ -47,7 +47,7 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
                 if (editable != null) {
                     if (sgdInput.getText().hashCode() == editable.hashCode()) {
                         myrInput.removeTextChangedListener(this);
-                        if (editable.toString().equalsIgnoreCase("")) {
+                        if (editable.toString().equalsIgnoreCase("") || editable.toString().equalsIgnoreCase(".")) {
                             myrInput.setText("");
                         } else {
                             double value = Double.valueOf(editable.toString()) * rate;
@@ -56,7 +56,7 @@ public class CurrencyActivity extends AppCompatActivity implements ExchangeRateA
                         myrInput.addTextChangedListener(this);
                     } else if (myrInput.getText().hashCode() == editable.hashCode()) {
                         sgdInput.removeTextChangedListener(this);
-                        if (editable.toString().equalsIgnoreCase("")) {
+                        if (editable.toString().equalsIgnoreCase("") || editable.toString().equalsIgnoreCase(".")) {
                             sgdInput.setText("");
                         } else {
                             double value = Double.valueOf(editable.toString()) / rate;

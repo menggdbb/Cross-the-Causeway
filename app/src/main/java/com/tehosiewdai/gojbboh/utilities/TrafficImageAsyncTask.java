@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]> {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = TrafficImageAsyncTask.class.getSimpleName();
 
     private final String TRAFFIC_URL = "https://api.data.gov.sg/v1/transport/traffic-images";
 

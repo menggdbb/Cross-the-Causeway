@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class ExchangeRateAsyncTask extends AsyncTask<Void, Void, Double> {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = ExchangeRateAsyncTask.class.getSimpleName();
 
     private final String EXCHANGE_RATE_URL = "https://api.exchangeratesapi.io/latest?base=SGD";
 

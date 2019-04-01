@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class WeatherAsyncTask extends AsyncTask<Void, Void, String[]> {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = WeatherAsyncTask.class.getSimpleName();
 
     private final String WEATHER_URL = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast";
 

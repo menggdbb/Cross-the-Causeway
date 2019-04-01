@@ -41,5 +41,6 @@
     <string name="sgd">SGD</string>
     <string name="myr">MYR</string>
     <string name="title_activity_maps">Map</string>
+    <string name="currency_exchange_title">Currency Converter</string>
 
 </resources>

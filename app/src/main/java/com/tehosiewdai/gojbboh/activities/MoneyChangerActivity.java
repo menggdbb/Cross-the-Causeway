@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,8 +42,8 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
+    }
 
     /**
      * Manipulates the map once available.
@@ -53,7 +54,6 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -63,13 +63,12 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         mMap.setMinZoomPreference(10.0f);
         mMap.setMaxZoomPreference(20.0f);
 
-        final LatLngBounds SINGAPORE = new LatLngBounds(
-                new LatLng(1.152761, 103.559083), new LatLng(1.487512, 104.113698));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(1.35, 103.8)));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(SINGAPORE, 1));
-        //new LatLng(1.35, 103.8
-        final LatLngBounds Singapore = new LatLngBounds(
+        LatLngBounds SINGAPORE = new LatLngBounds(
                 new LatLng(1.152761, 103.559083), new LatLng(1.487512, 104.113698));
+        mMap.setLatLngBoundsForCameraTarget(SINGAPORE);
+
 
 
 
