@@ -1,22 +1,72 @@
 [
     {
-        "name":"Good Friday"
+        "name":"Good Friday",
         "date":"19 Apr",
-        "country:"SG"
+        "country":"SG"
     },
     {
-        "name":
-        "date":
-        "country:
+        "name":"Labour Day",
+        "date":"01 May",
+        "country":"-"
     },
     {
-        "name":
-        "date":
-        "country:
+        "name":"Awal Ramadan",
+        "date":"06 May",
+        "country":"MY"
     },
     {
-         "name":
-         "date":
-         "country:
+         "name":"Vesak Day",
+         "date":"19 May",
+         "country":"-"
+     },
+    {
+         "name":"Hari Raya Puasa",
+         "date":"06 May",
+         "country":"-"
+     },
+     {
+         "name":"National Day",
+         "date":"09 Aug",
+         "country":"SG"
+     },
+     {
+         "name":"Hari Raya Haji",
+         "date":"11 Aug",
+         "country":"-"
+     },
+     {
+         "name":"Merdeka Day",
+         "date":"31 Aug",
+         "country":"MY"
+     },
+     {
+         "name":"Agong's Birthday",
+         "date":"09 Sep",
+         "country":"MY"
+     },
+     {
+         "name":"Malaysia Day",
+         "date":"16 Sep",
+         "country":"MY"
+     },
+     {
+         "name":"Hari Hol Almarhum Sultan Iskandar",
+         "date":"05 Oct",
+         "country":"MY"
+     },
+     {
+         "name":"Deepavali",
+         "date":"27 Oct",
+         "country":"-"
+     },
+     {
+         "name":"Prophet Muhammad's Birthday",
+         "date":"09 Nov,
+         "country":"MY"
+     },
+     {
+         "name":"Christmas Day",
+         "date":"25 Dec",
+         "country":"-"
      }
 ]
