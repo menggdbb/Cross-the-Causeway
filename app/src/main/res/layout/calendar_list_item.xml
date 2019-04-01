@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_holiday_date"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="15 May"/>
+
+    <TextView
+        android:id="@+id/list_holiday_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_toEndOf="@+id/list_holiday_date"
+        android:layout_toStartOf="@+id/list_holiday_country_container"
+        android:text="April fools"/>
+
+    <RelativeLayout
+        android:id="@+id/list_holiday_country_container"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true">
+        <TextView
+            android:id="@+id/list_holiday_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true"
+            android:text="SG"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

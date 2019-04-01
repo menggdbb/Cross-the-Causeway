@@ -1,16 +1,17 @@
 package com.tehosiewdai.gojbboh.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.tehosiewdai.gojbboh.R;
-
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.controller.CalendarListAdapter;
+import com.tehosiewdai.gojbboh.entity.PublicHoliday;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -19,45 +20,35 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-        Dictionary pHol_1 = new Hashtable();
-        pHol_1.put("19/04/2019", "Good Friday (SG)");
-        pHol_1.put("01/05/2019", "Labour Day");
-        pHol_1.put("06/05/2019", "Awal Ramadan (MY)");
-        pHol_1.put("19/05/2019", "Vesak Day");
-        pHol_1.put("05/06/2019", "Hari Raya Puasa");
-        pHol_1.put("09/08/2019", "National Day (SG)");
-        pHol_1.put("11/08/2019", "Hari Raya Haji");
-        pHol_1.put("31/08/2019", "Merdeka Day (MY)");
-        pHol_1.put("09/09/2019", "Agong's Birthday (MY)");
-        pHol_1.put("16/09/2019", "Malaysia Day");
-        pHol_1.put("05/10/2019", "Hari Hol Almarhum Sultan Iskandar (MY)");
-        pHol_1.put("27/10/2019", "Deepavali");
-        pHol_1.put("09/11/2019", "Prophet Muhammad's Birthday (MY)");
-        pHol_1.put("25/12/2019", "Christmas Day");
+        ArrayList<PublicHoliday> publicHolidays = new ArrayList<>();
+        publicHolidays.add(new PublicHoliday("19 Apr", "Good Friday", "SG"));
+        publicHolidays.add(new PublicHoliday("01 May", "Labour Day", "-"));
+        publicHolidays.add(new PublicHoliday("06 May", "Awal Ramadan", "MY"));
+        publicHolidays.add(new PublicHoliday("19 May", "Vesak Day", "-"));
+        publicHolidays.add(new PublicHoliday("06 May", "Hari Raya Puasa", "-"));
+        publicHolidays.add(new PublicHoliday("09 Aug", "National Day", "SG"));
+        publicHolidays.add(new PublicHoliday("11 Aug", "Hari Raya Haji", "-"));
+        publicHolidays.add(new PublicHoliday("31 Aug", "Merdeka Day", "MY"));
+        publicHolidays.add(new PublicHoliday("09 Sep", "Agong's Birthday", "MY"));
+        publicHolidays.add(new PublicHoliday("16 Sep", "Malaysia Day", "MY"));
+        publicHolidays.add(new PublicHoliday("05 Oct", "Hari Hol Almarhum Sultan Iskandar", "MY"));
+        publicHolidays.add(new PublicHoliday("27 Oct", "Deepavali", "-"));
+        publicHolidays.add(new PublicHoliday("09 Nov", "Prophet Muhammad's Birthday", "MY"));
+        publicHolidays.add(new PublicHoliday("25 Dec", "Christmas Day", "-"));
 
-        //Main Calendar Date
-        Calendar calendar = Calendar.getInstance();
-        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        String shortDate = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+        CalendarListAdapter adapter = new CalendarListAdapter(this, publicHolidays);
+
+        ListView listView = findViewById(R.id.holiday_list_view);
+        listView.setAdapter(adapter);
+
+
+        String currentDate = new SimpleDateFormat("dd MMM").format(new Date());
+
 
         TextView date1 = findViewById(R.id.date_1);
-        TextView nextHol = findViewById(R.id.nextHoliday);
-        TextView nextNextHol = findViewById(R.id.nextNextHoliday);
-        TextView pubHol = findViewById(R.id.p_hol_name);
+//        TextView pubHol = findViewById(R.id.p_hol_name);
         date1.setText(currentDate);
 
-        //Calendar colour change on public holidays
-        if (((Hashtable) pHol_1).containsKey(shortDate)) {
-            date1.setTextColor(0xffff0000);
-            pubHol.setText(pHol_1.get(shortDate).toString());
-            pubHol.setTextColor(0xffff0000);
-            nextHol.setText(pHol_1.elements().nextElement().toString());
-            nextNextHol.setText(pHol_1.elements().nextElement().toString());
-        } else {
-            date1.setTextColor(0xff000000);
-            pubHol.setText("Not a Public Holiday");
-            nextHol.setText(pHol_1.elements().nextElement().toString());
-            nextNextHol.setText(pHol_1.elements().nextElement().toString());
-        }
+
     }
 }

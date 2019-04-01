@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="26dp"
+        android:layout_marginBottom="26dp"
         android:background="@drawable/custom_border"
         tools:layout_editor_absoluteX="51dp"
         tools:layout_editor_absoluteY="79dp">
@@ -46,47 +47,11 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/nextHoliday"
-        android:layout_width="311dp"
-        android:layout_height="47dp"
-        android:layout_below="@id/upcoming"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="12dp"
-        android:text=" 19 April - Good Friday"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:gravity="fill"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="502dp"
-        android:background="@drawable/custom_border"/>
-
-    <TextView
-        android:id="@+id/nextNextHoliday"
-        android:layout_width="314dp"
-        android:layout_height="46dp"
-        android:layout_below="@id/nextHoliday"
-        android:text=" 1 May - Labour Day"
-        android:textColor="@android:color/black"
-        android:textSize="18dp"
-        android:gravity="fill"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="24dp"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="585dp"
-        android:background="@drawable/custom_border"/>
-
-    <TextView
-        android:id="@+id/upcoming"
-        android:layout_width="313dp"
-        android:layout_height="37dp"
-        android:text="Upcoming Public Holidays"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
+    <ListView
+        android:id="@+id/holiday_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/mainCalendar"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="24dp"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="459dp" />
+        android:padding="@dimen/fab_margin"/>
 
 </RelativeLayout>
