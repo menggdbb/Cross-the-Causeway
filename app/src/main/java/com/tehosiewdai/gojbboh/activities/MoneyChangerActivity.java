@@ -175,8 +175,7 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(findNearest(location)));
-                        mMap.moveCamera(CameraUpdateFactory.zoomTo( 14.0f ) );
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(findNearest(location), 14.0f));
                     }
                 }
             });
@@ -187,6 +186,7 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
     private LatLng findNearest(Location myLoc){
         LatLng nearestLoc = new LatLng(0,0);
         LatLng myLatLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+        Marker nearestMark = null;
         Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
 
         for (Marker marker : mMarkerArray) {
@@ -195,11 +195,15 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
             if (getDistance(temp, myLatLng) <= getDistance(nearestLoc, myLatLng)){
                 nearestLoc = temp;
                 Log.d("tag", "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
+                nearestMark = marker;
             }
         }
         Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
 
         Log.d("tag", "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
+        if (nearestMark != null){
+            nearestMark.showInfoWindow();
+        }
         return nearestLoc;
     }
 
