@@ -78,11 +78,20 @@ public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, MoneyChanger[]>
                     double lng = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
                     String title = feature.getJSONObject("properties").getString("Name");
                     String description = Html.fromHtml(feature.getJSONObject("properties").getString("Description")).toString();
-
+                    Log.v("tag", "description : " + description);
                     String name = description.substring(description.lastIndexOf("NAME")+1, description.indexOf("BUSINESS_POSTALCODE"));
+                    String postalCode = "Postal Code: ".concat(description.substring(description.lastIndexOf("BUSINESS_POSTALCODE")+19, description.indexOf("BUSINESS_ADDRESS2")));
+                    String add1 = description.substring(description.lastIndexOf("BUSINESS_ADDRESS1")+17, description.indexOf("BUSINESS_TYPE"));
+                    String add2 = description.substring(description.lastIndexOf("BUSINESS_ADDRESS2")+17, description.indexOf("BUSINESS_ADDRESS1"));
+                    String address = "";
+                    if(add2.compareTo("") != 0){
+                        address = "\nAddress: ".concat(add2).concat("\n                  ").concat(add1);
+                    } else {
+                        address =  "\nAddress: ".concat(add1);
+                    }
 
 
-                    moneyChangers[counter] = new MoneyChanger(lat, lng, name, title, "k");
+                    moneyChangers[counter] = new MoneyChanger(lat, lng, name, address, postalCode);
                     counter++;
 
                 } catch (JSONException e) {
