@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -31,6 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class MoneyChangerActivity extends FragmentActivity implements OnMapReadyCallback, OnRequestPermissionsResultCallback, MoneyChangerAsyncTask.MoneyChangerTaskCallback {
 
@@ -42,6 +46,11 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
 
     private static final int LOCATION_REQUEST_CODE = 991;
 
+    Button mapButtonClick;
+
+    private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +61,10 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        mapButtonClick = findViewById(R.id.buttonMaps);
+
+
 
     }
 
@@ -142,9 +155,64 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
                         .position(new LatLng(lat, lng))
                         .title(title)
                         .snippet(description));
+
+                mMarkerArray.add(marker);
             }
         } catch (JSONException e) {
             Log.e("TAG", String.valueOf(e));
         }
+    }
+
+    public void buttonClick(View v)
+    {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_REQUEST_CODE);
+        } else {
+            mMap.setMyLocationEnabled(true);
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(findNearest(location)));
+                        mMap.moveCamera(CameraUpdateFactory.zoomTo( 14.0f ) );
+                    }
+                }
+            });
+        }
+
+    }
+
+    private LatLng findNearest(Location myLoc){
+        LatLng nearestLoc = new LatLng(0,0);
+        LatLng myLatLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
+        Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
+
+        for (Marker marker : mMarkerArray) {
+            LatLng temp = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
+            Log.d("tag", "latlng = " + temp.latitude + ", " + temp.longitude );
+            if (getDistance(temp, myLatLng) <= getDistance(nearestLoc, myLatLng)){
+                nearestLoc = temp;
+                Log.d("tag", "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
+            }
+        }
+        Log.d("tag", "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude );
+
+        Log.d("tag", "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude );
+        return nearestLoc;
+    }
+
+    public double getDistance(LatLng LatLng1, LatLng LatLng2) {
+        double distance = 0;
+        Location locationA = new Location("A");
+        locationA.setLatitude(LatLng1.latitude);
+        locationA.setLongitude(LatLng1.longitude);
+        Location locationB = new Location("B");
+        locationB.setLatitude(LatLng2.latitude);
+        locationB.setLongitude(LatLng2.longitude);
+        distance = locationA.distanceTo(locationB);
+        Log.d("tag", "distance = " + distance );
+        return distance;
     }
 }
