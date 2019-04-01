@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.entity.TrafficObject;
+import com.tehosiewdai.gojbboh.entity.TrafficImage;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 
 public class TuasTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
@@ -51,22 +51,22 @@ public class TuasTrafficImageActivity extends AppCompatActivity implements Traff
     }
 
     @Override
-    public void onPostExecuteTrafficTask(TrafficObject[] result) {
+    public void onPostExecuteTrafficTask(TrafficImage[] result) {
 
         info1.setVisibility(View.VISIBLE);
         info2.setVisibility(View.VISIBLE);
         info3.setVisibility(View.VISIBLE);
 
-        for (TrafficObject trafficObject : result) {
-            if (trafficObject.getCameraId().equals("4703")) {
-                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image1);
-                datetime1.setText(trafficObject.getDatetime());
-            } else if (trafficObject.getCameraId().equals("4713")) {
-                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image2);
-                datetime2.setText(trafficObject.getDatetime());
-            } else if (trafficObject.getCameraId().equals("4712")) {
-                Picasso.with(this).load(trafficObject.getImageUrl()).placeholder(R.drawable.fff).into(image3);
-                datetime3.setText(trafficObject.getDatetime());
+        for (TrafficImage trafficImage : result) {
+            if (trafficImage.getCameraId().equals("4703")) {
+                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image1);
+                datetime1.setText(trafficImage.getDatetime());
+            } else if (trafficImage.getCameraId().equals("4713")) {
+                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image2);
+                datetime2.setText(trafficImage.getDatetime());
+            } else if (trafficImage.getCameraId().equals("4712")) {
+                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image3);
+                datetime3.setText(trafficImage.getDatetime());
             }
         }
     }

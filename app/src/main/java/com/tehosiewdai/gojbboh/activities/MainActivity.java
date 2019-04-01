@@ -3,6 +3,7 @@ package com.tehosiewdai.gojbboh.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.entity.TrafficObject;
+import com.tehosiewdai.gojbboh.entity.TrafficImage;
 import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
 import com.tehosiewdai.gojbboh.utilities.WeatherAsyncTask;
 
@@ -107,19 +108,19 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onPostExecuteTrafficTask(TrafficObject[] result) {
+    public void onPostExecuteTrafficTask(TrafficImage[] result) {
         loadingIndicator.setVisibility(View.INVISIBLE);
-        for (TrafficObject trafficObject : result) {
-            if (trafficObject.getCameraId().equals("2701")) {
+        for (TrafficImage trafficImage : result) {
+            if (trafficImage.getCameraId().equals("2701")) {
                 Picasso
                         .with(this)
-                        .load(trafficObject.getImageUrl())
+                        .load(trafficImage.getImageUrl())
                         .placeholder(R.drawable.fff)
                         .into(woodlandsHomeImage);
-            } else if (trafficObject.getCameraId().equals("4703")) {
+            } else if (trafficImage.getCameraId().equals("4703")) {
                 Picasso
                         .with(this)
-                        .load(trafficObject.getImageUrl())
+                        .load(trafficImage.getImageUrl())
                         .placeholder(R.drawable.fff)
                         .into(tuasHomeImage);
             }
@@ -152,16 +153,16 @@ public class MainActivity extends AppCompatActivity implements
                 textView.setText(R.string.fair);
                 imageView.setImageResource(R.drawable.fair_day);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
                 break;
             case "Fair & Warm":
                 textView.setText(R.string.fair_and_warm);
                 imageView.setImageResource(R.drawable.fair_and_warm);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
                 break;
             case "Partly Cloudy (Night)":
@@ -174,16 +175,16 @@ public class MainActivity extends AppCompatActivity implements
                 textView.setText(R.string.partly_cloudy);
                 imageView.setImageResource(R.drawable.partly_cloudy_day);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
                 break;
             case "Cloudy":
                 textView.setText(R.string.cloudy);
                 imageView.setImageResource(R.drawable.cloudy);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.cloudy_backdrop);
                 break;
             case "Hazy":
@@ -200,16 +201,16 @@ public class MainActivity extends AppCompatActivity implements
                 textView.setText(R.string.windy);
                 imageView.setImageResource(R.drawable.windy);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
                 break;
             case "Mist":
                 textView.setText(R.string.mist);
                 imageView.setImageResource(R.drawable.mist);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
                 break;
             case "Light Rain":
@@ -271,8 +272,8 @@ public class MainActivity extends AppCompatActivity implements
                 textView.setText(R.string.weather_error);
                 imageView.setImageResource(R.drawable.fair_day);
                 imageView.setColorFilter(0);
-                textView.setTextColor(getResources().getColor(R.color.black));
-                title.setTextColor(getResources().getColor(R.color.black));
+                textView.setTextColor(ContextCompat.getColor(this, R.color.black));
+                title.setTextColor(ContextCompat.getColor(this, R.color.black));
                 backdrop.setImageResource(R.drawable.day_backdrop);
         }
 

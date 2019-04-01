@@ -3,7 +3,7 @@ package com.tehosiewdai.gojbboh.utilities;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.tehosiewdai.gojbboh.entity.TrafficObject;
+import com.tehosiewdai.gojbboh.entity.TrafficImage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
-public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]> {
+public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficImage[]> {
 
     private static final String TAG = TrafficImageAsyncTask.class.getSimpleName();
 
@@ -37,7 +37,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
     }
 
     @Override
-    protected TrafficObject[] doInBackground(Void... voids) {
+    protected TrafficImage[] doInBackground(Void... voids) {
         try {
             URL url = new URL(TRAFFIC_URL);
             String results = NetworkUtils.getResponseFromHttpUrl(url);
@@ -53,22 +53,22 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
     }
 
     @Override
-    protected void onPostExecute(TrafficObject[] result) {
+    protected void onPostExecute(TrafficImage[] result) {
         if (callback != null && result != null){
             callback.onPostExecuteTrafficTask(result);
         }
     }
 
-    private TrafficObject[] parseJSON(String results) throws JSONException {
+    private TrafficImage[] parseJSON(String results) throws JSONException {
 
-        TrafficObject[] trafficObjects = new TrafficObject[cameraIds.length];
+        TrafficImage[] trafficImages = new TrafficImage[cameraIds.length];
         int counter = 0;
         JSONArray cameras = null;
 
         try {
             JSONObject trafficObject = new JSONObject(results);
-            JSONArray trafficImages = trafficObject.getJSONArray("items");
-            cameras = trafficImages.getJSONObject(0).getJSONArray("cameras");
+            JSONArray trafficImagesItems = trafficObject.getJSONArray("items");
+            cameras = trafficImagesItems.getJSONObject(0).getJSONArray("cameras");
 
         } catch (JSONException e) {
             Log.e(TAG, String.valueOf(e));
@@ -80,7 +80,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
                 }
 
                 if (Arrays.asList(cameraIds).contains((String) cameras.getJSONObject(i).get("camera_id"))){
-                    trafficObjects[counter] = new TrafficObject(
+                    trafficImages[counter] = new TrafficImage(
                             (String) cameras.getJSONObject(i).get("camera_id"),
                             (String) cameras.getJSONObject(i).get("image"),
                             formatDatetime((String) cameras.getJSONObject(i).get("timestamp")));
@@ -90,7 +90,7 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
             }
         }
 
-        return trafficObjects;
+        return trafficImages;
     }
 
     private String formatDatetime(String datetime){
@@ -108,6 +108,6 @@ public class TrafficImageAsyncTask extends AsyncTask<Void, Void, TrafficObject[]
 
     public interface TrafficImageTaskCallback {
         void onPreExecuteTrafficTask();
-        void onPostExecuteTrafficTask(TrafficObject[] result);
+        void onPostExecuteTrafficTask(TrafficImage[] result);
     }
 }
