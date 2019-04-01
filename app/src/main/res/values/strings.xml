@@ -2,7 +2,6 @@
     <string name="app_name">GoJbBoh</string>
     <string name="menu">menu</string>
     <string name="title_activity_menu">MenuActivity</string>
-    <string name="title_activity_money_changer">Location</string>
 
     <!--weather descriptions-->
     <string name="fair">Fair</string>
@@ -43,9 +42,13 @@
     <string name="title_activity_maps">Map</string>
     <string name="currency_exchange_title">Currency Converter</string>
 
+    <!--money changer strings-->
     <string name="google_maps_key">AIzaSyAX2VOrsCskPZEaG6tJJvtQUlaC1BXqE9c</string>
-
+    <string name="money_changer_title">Money Changer Locations</string>
     <string name="map_button">Find Nearest</string>
+
+    <!--calendar strings-->
     <string name="calendar_title">Calendar</string>
+
 
 </resources>

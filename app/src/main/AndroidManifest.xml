@@ -38,7 +38,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activities.MoneyChangerActivity" />
+        <activity
+            android:name=".activities.MoneyChangerActivity"
+            android:label="@string/money_changer_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MenuActivity" />
+        </activity>
         <activity
             android:name=".activities.WoodlandsTrafficImageActivity"
             android:label="@string/woodlands_title"
@@ -59,17 +65,20 @@
             android:name=".activities.CurrencyActivity"
             android:label="@string/currency_exchange_title"
             android:parentActivityName=".activities.MenuActivity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".activities.MenuActivity" />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MenuActivity" />
+        </activity>
 
         <activity
             android:name=".activities.CalendarActivity"
             android:label="@string/calendar_title"
-            android:parentActivityName=".activities.MenuActivity"
-            />
+            android:parentActivityName=".activities.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MenuActivity" />
+        </activity>
         <activity
             android:name=".activities.MenuActivity"
             android:label="@string/menu"

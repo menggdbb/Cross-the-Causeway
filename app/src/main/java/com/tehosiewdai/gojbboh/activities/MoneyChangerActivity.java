@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +35,7 @@ import com.tehosiewdai.gojbboh.utilities.MoneyChangerAsyncTask;
 import java.util.ArrayList;
 
 
-public class MoneyChangerActivity extends FragmentActivity implements OnMapReadyCallback, OnRequestPermissionsResultCallback, MoneyChangerAsyncTask.MoneyChangerTaskCallback {
+public class MoneyChangerActivity extends AppCompatActivity implements OnMapReadyCallback, OnRequestPermissionsResultCallback, MoneyChangerAsyncTask.MoneyChangerTaskCallback {
 
     private final String TAG = MoneyChangerActivity.class.getSimpleName();
 
@@ -199,21 +200,21 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
     private LatLng findNearest(Location myLoc) {
         LatLng nearestLoc = new LatLng(0, 0);
         LatLng myLatLng = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
+//        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
         Marker nearestMark = null;
 
         for (Marker marker : mMarkerArray) {
             LatLng temp = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
-            Log.d(TAG, "latlng = " + temp.latitude + ", " + temp.longitude);
+//            Log.d(TAG, "latlng = " + temp.latitude + ", " + temp.longitude);
             if (getDistance(temp, myLatLng) <= getDistance(nearestLoc, myLatLng)) {
                 nearestLoc = temp;
-                Log.d(TAG, "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
+//                Log.d(TAG, "current nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
                 nearestMark = marker;
             }
         }
-        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
+//        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
 
-        Log.d(TAG, "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
+//        Log.d(TAG, "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
         if (nearestMark != null){
             nearestMark.showInfoWindow();
         }
@@ -229,7 +230,7 @@ public class MoneyChangerActivity extends FragmentActivity implements OnMapReady
         locationB.setLatitude(LatLng2.latitude);
         locationB.setLongitude(LatLng2.longitude);
         distance = locationA.distanceTo(locationB);
-        Log.d(TAG, "distance = " + distance);
+//        Log.d(TAG, "distance = " + distance);
         return distance;
     }
 }
