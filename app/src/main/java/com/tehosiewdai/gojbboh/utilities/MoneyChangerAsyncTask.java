@@ -79,7 +79,10 @@ public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, MoneyChanger[]>
                     String title = feature.getJSONObject("properties").getString("Name");
                     String description = Html.fromHtml(feature.getJSONObject("properties").getString("Description")).toString();
 
-                    moneyChangers[counter] = new MoneyChanger(lat, lng, title, description, "k");
+                    String name = description.substring(description.lastIndexOf("NAME")+1, description.indexOf("BUSINESS_POSTALCODE"));
+
+
+                    moneyChangers[counter] = new MoneyChanger(lat, lng, name, title, "k");
                     counter++;
 
                 } catch (JSONException e) {
