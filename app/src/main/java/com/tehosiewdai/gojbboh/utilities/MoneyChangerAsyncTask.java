@@ -71,9 +71,8 @@ public class MoneyChangerAsyncTask extends AsyncTask<Void, Void, MoneyChanger[]>
             moneyChangers = new MoneyChanger[features.length()];
             int counter = 0;
             for (int i = 0; i < features.length(); i++) {
-                JSONObject feature = null;
                 try {
-                    feature = features.getJSONObject(i);
+                    JSONObject feature = features.getJSONObject(i);
                     double lat = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
                     double lng = feature.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
                     String title = feature.getJSONObject("properties").getString("Name");
