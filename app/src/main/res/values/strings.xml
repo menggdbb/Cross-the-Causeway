@@ -43,4 +43,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="currency_exchange_title">Currency Converter</string>
 
+    <string name="google_maps_key">AIzaSyAX2VOrsCskPZEaG6tJJvtQUlaC1BXqE9c</string>
+
+    <string name="map_button">Find Nearest</string>
+
 </resources>
