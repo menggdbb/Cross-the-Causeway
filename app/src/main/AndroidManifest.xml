@@ -65,7 +65,11 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".activities.MenuActivity" />
 
-        <activity android:name=".activities.CalendarActivity" />
+        <activity
+            android:name=".activities.CalendarActivity"
+            android:label="@string/calendar_title"
+            android:parentActivityName=".activities.MenuActivity"
+            />
         <activity
             android:name=".activities.MenuActivity"
             android:label="@string/menu"

@@ -46,5 +46,6 @@
     <string name="google_maps_key">AIzaSyAX2VOrsCskPZEaG6tJJvtQUlaC1BXqE9c</string>
 
     <string name="map_button">Find Nearest</string>
+    <string name="calendar_title">Calendar</string>
 
 </resources>

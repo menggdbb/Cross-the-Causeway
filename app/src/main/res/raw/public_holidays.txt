@@ -61,7 +61,7 @@
      },
      {
          "name":"Prophet Muhammad's Birthday",
-         "date":"09 Nov,
+         "date":"09 Nov",
          "country":"MY"
      },
      {
