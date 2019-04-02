@@ -8,11 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,45 +34,11 @@ import java.util.ArrayList;
 
 public class MoneyChangerActivity extends AppCompatActivity implements OnMapReadyCallback, OnRequestPermissionsResultCallback, MoneyChangerAsyncTask.MoneyChangerTaskCallback {
 
-    private final String TAG = MoneyChangerActivity.class.getSimpleName();
-
-    private GoogleMap mMap;
-
-    private FusedLocationProviderClient mFusedLocationClient;
-
     private static final int LOCATION_REQUEST_CODE = 991;
-
-    Button mapButtonClick;
-
+    private final String TAG = MoneyChangerActivity.class.getSimpleName();
+    private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationClient;
     private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
-
-    class MyInfoWindowAdapter implements InfoWindowAdapter{
-
-        private final View myContentsView;
-
-        MyInfoWindowAdapter(){
-            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_windows, null);
-        }
-
-        @Override
-        public View getInfoContents(Marker marker) {
-
-            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.moneyChanger));
-            tvTitle.setText(marker.getTitle());
-            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
-            tvSnippet.setText(marker.getSnippet());
-
-            return myContentsView;
-        }
-
-        @Override
-        public View getInfoWindow(Marker marker) {
-            // TODO Auto-generated method stub
-            return null;
-        }
-
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +50,6 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        mapButtonClick = findViewById(R.id.buttonMaps);
-
-
 
     }
 
@@ -188,7 +147,7 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    if (location != null) {
+                    if (location != null && !mMarkerArray.isEmpty()) {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(findNearest(location), 14.0f));
                     }
                 }
@@ -215,7 +174,7 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
 //        Log.d(TAG, "my latlng = " + myLatLng.latitude + ", " + myLatLng.longitude);
 
 //        Log.d(TAG, "actual nearest latlng = " + nearestLoc.latitude + ", " + nearestLoc.longitude);
-        if (nearestMark != null){
+        if (nearestMark != null) {
             nearestMark.showInfoWindow();
         }
         return nearestLoc;
@@ -232,5 +191,31 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
         distance = locationA.distanceTo(locationB);
 //        Log.d(TAG, "distance = " + distance);
         return distance;
+    }
+
+    public class MyInfoWindowAdapter implements InfoWindowAdapter {
+
+        private final View myContentsView;
+
+        MyInfoWindowAdapter() {
+            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_windows, null);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+            TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.moneyChanger));
+            tvTitle.setText(marker.getTitle());
+            TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.snippet));
+            tvSnippet.setText(marker.getSnippet());
+
+            return myContentsView;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
+
     }
 }
