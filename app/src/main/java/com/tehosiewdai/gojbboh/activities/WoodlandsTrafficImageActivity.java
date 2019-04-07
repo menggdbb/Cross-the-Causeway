@@ -2,72 +2,50 @@ package com.tehosiewdai.gojbboh.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tehosiewdai.gojbboh.R;
-import com.tehosiewdai.gojbboh.entity.TrafficImage;
-import com.tehosiewdai.gojbboh.utilities.TrafficImageAsyncTask;
+import com.tehosiewdai.gojbboh.controller.TrafficImageController;
 
-public class WoodlandsTrafficImageActivity extends AppCompatActivity implements TrafficImageAsyncTask.TrafficImageTaskCallback {
-
-    private ImageView image1;
-    private ImageView image2;
-    private ImageView image3;
-
-    private TextView datetime1;
-    private TextView datetime2;
-    private TextView datetime3;
-
-    private RelativeLayout info1;
-    private RelativeLayout info2;
-    private RelativeLayout info3;
+public class WoodlandsTrafficImageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_woodlands_traffic_image);
 
-        image1 = findViewById(R.id.woodlands_image_1);
-        image2 = findViewById(R.id.woodlands_image_2);
-        image3 = findViewById(R.id.woodlands_image_3);
+        ImageView image1 = findViewById(R.id.woodlands_image_1);
+        ImageView image2 = findViewById(R.id.woodlands_image_2);
+        ImageView image3 = findViewById(R.id.woodlands_image_3);
 
-        datetime1 = findViewById(R.id.woodlands_image_1_datetime);
-        datetime2 = findViewById(R.id.woodlands_image_2_datetime);
-        datetime3 = findViewById(R.id.woodlands_image_3_datetime);
+        TextView datetime1 = findViewById(R.id.woodlands_image_1_datetime);
+        TextView datetime2 = findViewById(R.id.woodlands_image_2_datetime);
+        TextView datetime3 = findViewById(R.id.woodlands_image_3_datetime);
 
-        info1 = findViewById(R.id.woodlands_image_1_info);
-        info2 = findViewById(R.id.woodlands_image_2_info);
-        info3 = findViewById(R.id.woodlands_image_3_info);
+        Picasso
+                .with(this)
+                .load(getIntent().getStringExtra(TrafficImageController.WOODLANDS_CAUSEWAY_ID))
+                .placeholder(R.drawable.fff)
+                .into(image1);
 
-        new TrafficImageAsyncTask(this).execute();
-    }
+        datetime1.setText(getIntent().getStringExtra(TrafficImageController.WOODLANDS_CHECKPOINT_ID_DATETIME));
 
-    @Override
-    public void onPreExecuteTrafficTask() {
-    }
+        Picasso
+                .with(this)
+                .load(getIntent().getStringExtra(TrafficImageController.WOODLANDS_CHECKPOINT_ID))
+                .placeholder(R.drawable.fff)
+                .into(image2);
 
-    @Override
-    public void onPostExecuteTrafficTask(TrafficImage[] result) {
+        datetime2.setText(getIntent().getStringExtra(TrafficImageController.WOODLANDS_CAUSEWAY_ID_DATETIME));
 
-        info1.setVisibility(View.VISIBLE);
-        info2.setVisibility(View.VISIBLE);
-        info3.setVisibility(View.VISIBLE);
+        Picasso
+                .with(this)
+                .load(getIntent().getStringExtra(TrafficImageController.WOODLANDS_FLYOVER_ID))
+                .placeholder(R.drawable.fff)
+                .into(image3);
 
-        for (TrafficImage trafficImage : result) {
-            if (trafficImage.getCameraId().equals("2701")) {
-                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image1);
-                datetime1.setText(trafficImage.getDatetime());
-            } else if (trafficImage.getCameraId().equals("2702")) {
-                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image2);
-                datetime2.setText(trafficImage.getDatetime());
-            } else if (trafficImage.getCameraId().equals("2704")) {
-                Picasso.with(this).load(trafficImage.getImageUrl()).placeholder(R.drawable.fff).into(image3);
-                datetime3.setText(trafficImage.getDatetime());
-            }
-        }
+        datetime3.setText(getIntent().getStringExtra(TrafficImageController.WOODLANDS_FLYOVER_ID_DATETIME));
     }
 }

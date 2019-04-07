@@ -1,4 +1,4 @@
-package com.tehosiewdai.gojbboh.controller;
+package com.tehosiewdai.gojbboh.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -33,9 +33,11 @@ public class CalendarListAdapter extends ArrayAdapter<PublicHoliday> {
         TextView nameTextView = listItemView.findViewById(R.id.list_holiday_name);
         TextView countryTextView = listItemView.findViewById(R.id.list_holiday_country);
 
-        dateTextView.setText(publicHoliday.getDate());
-        nameTextView.setText(publicHoliday.getName());
-        countryTextView.setText(publicHoliday.getCountry());
+        if (publicHoliday != null) {
+            dateTextView.setText(publicHoliday.getDate());
+            nameTextView.setText(publicHoliday.getName());
+            countryTextView.setText(publicHoliday.getCountry());
+        }
 
         return listItemView;
     }

@@ -1,71 +1,58 @@
 package com.tehosiewdai.gojbboh.activities;
 
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.tehosiewdai.gojbboh.R;
+import com.tehosiewdai.gojbboh.controller.MenuController;
 
 public class MenuActivity extends AppCompatActivity {
+
+    private ImageView calendarImage;
+    private ImageView exchangeImage;
+    private ImageView locationImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        ImageView calendarImage = findViewById(R.id.calendar_image);
-        ImageView exchangeImage = findViewById(R.id.exchange_image);
-        ImageView locationImage = findViewById(R.id.location_image);
+        calendarImage = findViewById(R.id.calendar_image);
+        exchangeImage = findViewById(R.id.exchange_image);
+        locationImage = findViewById(R.id.location_image);
 
         ActionBar actionBar = this.getSupportActionBar();
 
-        if (actionBar != null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        calendarImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = MenuActivity.this;
-                Class destinationActivity = CalendarActivity.class;
-                Intent startIntent = new Intent(context, destinationActivity);
-                startActivity(startIntent);
-            }
-        });
-
-        exchangeImage.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Context context = MenuActivity.this;
-                Class destinationActivity = CurrencyActivity.class;
-                Intent startIntent = new Intent(context, destinationActivity);
-                startActivity(startIntent);
-            }
-        });
-
-        locationImage.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Context context = MenuActivity.this;
-                Class destinationActivity = MoneyChangerActivity.class;
-                Intent startIntent = new Intent(context, destinationActivity);
-                startActivity(startIntent);
-            }
-        });
+        MenuController menuController = new MenuController(this);
+        menuController.setIntents();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public ImageView getCalendarImage() {
+        return calendarImage;
+    }
+
+    public ImageView getExchangeImage() {
+        return exchangeImage;
+    }
+
+    public ImageView getLocationImage() {
+        return locationImage;
     }
 }

@@ -1,9 +1,6 @@
 package com.tehosiewdai.gojbboh.utilities;
 
 import android.content.Context;
-import android.renderscript.ScriptGroup;
-
-import com.tehosiewdai.gojbboh.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,11 +11,9 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
-public class FileUtils {
+public class FileReader {
 
-    private static final String TAG = FileUtils.class.getSimpleName();
-
-    public static String readFile(Context context, int resourceId){
+    public static String readFile(Context context, int resourceId) {
         InputStream is = context.getResources().openRawResource(resourceId);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];

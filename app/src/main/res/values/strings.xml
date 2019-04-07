@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Cross the Causeway</string>
-    <string name="menu">menu</string>
+    <string name="menu">Menu</string>
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="no_internet_toast">Please turn on your internet connection</string>
 
     <!--weather descriptions-->
     <string name="fair">Fair</string>
@@ -49,6 +50,7 @@
 
     <!--calendar strings-->
     <string name="calendar_title">Calendar</string>
+
 
 
 </resources>

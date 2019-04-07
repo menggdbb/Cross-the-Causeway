@@ -22,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/woodlands_image_1"
-            android:background="@color/colorPrimary"
-            android:visibility="invisible">
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/woodlands_image_1_title"
@@ -58,8 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/woodlands_image_2"
-            android:background="@color/colorPrimary"
-            android:visibility="invisible">
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/woodlands_image_2_title"
@@ -94,8 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/woodlands_image_3"
-            android:background="@color/colorPrimary"
-            android:visibility="invisible">
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/woodlands_image_3_title"
