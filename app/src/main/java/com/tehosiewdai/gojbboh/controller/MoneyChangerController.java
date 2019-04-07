@@ -4,11 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -116,7 +114,7 @@ public class MoneyChangerController implements ControllerCallback {
     }
 
     @SuppressLint("MissingPermission")
-    public void moveToLocation(){
+    public void moveToLocation() {
         map.setMyLocationEnabled(true);
         fusedLocationClient.getLastLocation().addOnSuccessListener(activity, new OnSuccessListener<Location>() {
             @Override
@@ -147,7 +145,7 @@ public class MoneyChangerController implements ControllerCallback {
         return nearestLoc;
     }
 
-    public double getDistance(LatLng LatLng1, LatLng LatLng2) {
+    private double getDistance(LatLng LatLng1, LatLng LatLng2) {
         double distance;
         Location locationA = new Location("A");
         locationA.setLatitude(LatLng1.latitude);
