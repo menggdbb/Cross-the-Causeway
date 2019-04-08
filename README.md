@@ -1,6 +1,6 @@
 # Cross the Causeway
 
-An Android Application dedicated to users crossing the causeway to Malaysia from Singapore
+An Android Application dedicated to users crossing the causeway to Malaysia from Singapore.
 
 ## About
 This is a group coursework for Nanyang Tehcnological University CE/CZ 2006 Software Engineering.
