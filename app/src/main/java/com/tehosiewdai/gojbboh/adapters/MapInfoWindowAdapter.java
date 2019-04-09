@@ -8,14 +8,31 @@ import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.model.Marker;
 import com.tehosiewdai.gojbboh.R;
 
+/**
+ * Adapter for info window display on google maps.
+ */
 public class MapInfoWindowAdapter implements InfoWindowAdapter {
 
+    /**
+     * View for contents.
+     */
     private View myContentsView;
 
+    /**
+     * Instantiates the info window adapter.
+     *
+     * @param context activity that uses it.
+     */
     public MapInfoWindowAdapter(Activity context) {
-        myContentsView = context.getLayoutInflater().inflate(R.layout.custom_info_windows,null);
+        myContentsView = context.getLayoutInflater().inflate(R.layout.custom_info_windows, null);
     }
 
+    /**
+     * Returns a view with the info window contents.
+     *
+     * @param marker Google Map marker.
+     * @return the View with the contents.
+     */
     @Override
     public View getInfoContents(Marker marker) {
 
@@ -27,6 +44,12 @@ public class MapInfoWindowAdapter implements InfoWindowAdapter {
         return myContentsView;
     }
 
+    /**
+     * Does nothing.
+     *
+     * @param marker Google Map marker.
+     * @return null.
+     */
     @Override
     public View getInfoWindow(Marker marker) {
         return null;

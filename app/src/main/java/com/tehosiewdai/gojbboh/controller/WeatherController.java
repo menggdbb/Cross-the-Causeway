@@ -13,31 +13,59 @@ import com.tehosiewdai.gojbboh.utilities.WeatherReader;
 
 import java.util.ArrayList;
 
+/**
+ * Controller class for logic about weather updates.
+ */
 public class WeatherController implements ControllerCallback {
 
+    /**
+     * URL string for API access to weather updates.
+     */
     private final String WEATHER_URL = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast";
 
+    /**
+     * Array list for weather descriptions and its locations.
+     */
     private ArrayList<Weather> weatherDescriptions;
 
+    /**
+     * MainActivity that uses this controller.
+     */
     private MainActivity activity;
 
+    /**
+     * Instantiates the controller.
+     *
+     * @param activity the activity that instantiated it.
+     */
     public WeatherController(MainActivity activity) {
         this.activity = activity;
         weatherDescriptions = new ArrayList<>();
     }
 
+    /**
+     * Implements ControllerCallback method.
+     * Sets loading indicators to indicate that weather updates are being loaded.
+     */
     @Override
     public void onPreExecute() {
         activity.getWoodlandsLoadingIndicator().setVisibility(View.VISIBLE);
         activity.getTuasLoadingIndicator().setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Implements ControllerCallback method.
+     * Actions done after querying the JSON result in the background.
+     *
+     * @param results JSON string queried.
+     */
     @Override
     public void onPostExecute(String results) {
         weatherDescriptions = WeatherReader.getWeather(results);
         activity.getWoodlandsLoadingIndicator().setVisibility(View.INVISIBLE);
         activity.getTuasLoadingIndicator().setVisibility(View.INVISIBLE);
 
+        //Displays weather updates if at Woodlands or Tuas.
         for (Weather description : weatherDescriptions) {
             if (description.getArea().equals("Woodlands")) {
                 displayWeather(
@@ -60,16 +88,33 @@ public class WeatherController implements ControllerCallback {
 
     }
 
+    /**
+     * Gets the URL string for API access to weather updates.
+     *
+     * @return URL string for API access to weather updates..
+     */
     @Override
     public String getUrlString() {
         return WEATHER_URL;
     }
 
+    /**
+     * Executes a background process to retrieve JSON string from the API.
+     */
     public void runApiQuery() {
         weatherDescriptions.clear();
         new ApiAsyncTask(this).execute();
     }
 
+    /**
+     * Correlates the weather description from the weather updates and sets descriptions and assets on the Views.
+     *
+     * @param description Description of weather.
+     * @param textView    TextView for description of weather.
+     * @param imageView   ImageView for icon for the weather description.
+     * @param title       TextView for the name of the location.
+     * @param backdrop    ImageView for the image background associated to the current weather.
+     */
     private void displayWeather(String description, TextView textView, ImageView imageView, TextView title, ImageView backdrop) {
         switch (description) {
             case "Fair (Night)":

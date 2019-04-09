@@ -12,12 +12,29 @@ import com.tehosiewdai.gojbboh.entity.PublicHoliday;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter to hold the list of public holidays.
+ */
 public class CalendarListAdapter extends ArrayAdapter<PublicHoliday> {
 
-    public CalendarListAdapter(Activity context, ArrayList<PublicHoliday> publicHolidays){
+    /**
+     * Instantiates the adapter.
+     *
+     * @param context        activity that is using this adapter.
+     * @param publicHolidays list of public holidays.
+     */
+    public CalendarListAdapter(Activity context, ArrayList<PublicHoliday> publicHolidays) {
         super(context, 0, publicHolidays);
     }
 
+    /**
+     * Get a View that displays the data at the specified position in the data set.
+     *
+     * @param position    The position of the item within the adapter's data set of the item whose view we want.
+     * @param convertView This value may be null.
+     * @param parent      This value must never be null.
+     * @return This value will never be null.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

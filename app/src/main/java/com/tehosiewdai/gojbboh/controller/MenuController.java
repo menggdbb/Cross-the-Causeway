@@ -8,16 +8,30 @@ import com.tehosiewdai.gojbboh.activities.CurrencyActivity;
 import com.tehosiewdai.gojbboh.activities.MenuActivity;
 import com.tehosiewdai.gojbboh.activities.MoneyChangerActivity;
 
+/**
+ * Controller class for the menu.
+ */
 public class MenuController {
 
+    /**
+     * MenuACtivity that uses the controller.
+     */
     private MenuActivity activity;
 
+    /**
+     * Instantiates the controller.
+     *
+     * @param activity activity that instantiated the controller.
+     */
     public MenuController(MenuActivity activity){
 
         this.activity = activity;
 
     }
 
+    /**
+     * Sets click event listeners on the image icons sets intents to another activity.
+     */
     public void setIntents(){
         activity.getCalendarImage().setOnClickListener(new View.OnClickListener() {
             @Override

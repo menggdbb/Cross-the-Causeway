@@ -10,10 +10,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Reader to read money changer locations.
+ */
 public class TrafficImageReader {
 
+    /**
+     * Simple name of the class.
+     */
     private static final String TAG = TrafficImageReader.class.getSimpleName();
 
+    /**
+     * Gets the JSON string and returns the list of traffic images.
+     *
+     * @param results JSON string to be parsed.
+     * @return list of traffic images.
+     */
     public static ArrayList<TrafficImage> getTrafficImages(String results) {
 
         ArrayList<TrafficImage> trafficImages = new ArrayList<>();
@@ -46,6 +58,11 @@ public class TrafficImageReader {
         return trafficImages;
     }
 
+    /**
+     * Formats the date and time from the date and time given from the JSON string.
+     * @param datetime original date and time format.
+     * @return formatted date and time.
+     */
     private static String formatDatetime(String datetime) {
         String date = datetime.substring(0, 10);
         String time;

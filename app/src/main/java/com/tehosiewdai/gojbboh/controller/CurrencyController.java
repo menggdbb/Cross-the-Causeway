@@ -9,30 +9,59 @@ import com.tehosiewdai.gojbboh.activities.CurrencyActivity;
 import com.tehosiewdai.gojbboh.utilities.ApiAsyncTask;
 import com.tehosiewdai.gojbboh.utilities.ExchangeRateReader;
 
-public class CurrencyController implements ControllerCallback{
+/**
+ * Controller class for logic about exchange rate.
+ */
+public class CurrencyController implements ControllerCallback {
 
+    /**
+     * URL string for API access to exchange rates.
+     */
     private final String EXCHANGE_RATE_URL = "https://api.exchangeratesapi.io/latest?base=SGD";
 
+    /**
+     * exchange rate between SGD and MYR.
+     */
     private double rate;
 
+    /**
+     * CurrencyActivity that uses this activity.
+     */
     private CurrencyActivity activity;
 
-    public CurrencyController(CurrencyActivity activity){
+    /**
+     * Instantiates the controller.
+     *
+     * @param activity the activity that instantiated it.
+     */
+    public CurrencyController(CurrencyActivity activity) {
         this.activity = activity;
         rate = 0.0;
     }
 
-
+    /**
+     * Implements ControllerCallback method.
+     * Does nothing.
+     */
     @Override
-    public void onPreExecute() {}
+    public void onPreExecute() {
+    }
 
+    /**
+     * Implements ControllerCallback method.
+     * Actions done after querying the JSON result in the background.
+     *
+     * @param results JSON string queried.
+     */
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onPostExecute(String results) {
 
+        //gets the exchange rate after using the ExchangeRateReader to read the JSON string result.
         rate = ExchangeRateReader.getExchangeRate(results);
         activity.getExchangeRate().setText("1SGD = " + String.format("%.2f", rate) + "MYR");
 
+        //TextWatcher to observe if text has changed in the EditText inputs for SGD and MYR.
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,11 +104,19 @@ public class CurrencyController implements ControllerCallback{
         activity.getMyrInput().addTextChangedListener(textWatcher);
     }
 
+    /**
+     * Gets the URL string for API access to exchange rates.
+     *
+     * @return URL string for API access to exchange rates.
+     */
     @Override
     public String getUrlString() {
         return EXCHANGE_RATE_URL;
     }
 
+    /**
+     * Executes a background process to retrieve JSON string from the API.
+     */
     public void runApiQuery() {
         new ApiAsyncTask(this).execute();
     }

@@ -14,20 +14,40 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Controller class for logic about Calendars.
+ */
 public class CalendarController {
 
+    /**
+     * Index of local data for public holidays.
+     */
     private static final int PUBLIC_HOLIDAY_FILE_INDEX = R.raw.public_holidays;
 
+    /**
+     * Array list of public holidays.
+     */
     private ArrayList<PublicHoliday> publicHolidays;
 
+    /**
+     * CalendarActivity that uses this controller.
+     */
     private CalendarActivity activity;
 
-    public CalendarController(CalendarActivity activity){
+    /**
+     * Instantiates the controller.
+     *
+     * @param activity the activity that instantiated it.
+     */
+    public CalendarController(CalendarActivity activity) {
         this.activity = activity;
         publicHolidays = new ArrayList<>();
     }
 
-    public void displayCalendar(){
+    /**
+     * Displays the list of public holidays and the current date.
+     */
+    public void displayCalendar() {
         String result = FileReader.readFile(activity, PUBLIC_HOLIDAY_FILE_INDEX);
         publicHolidays = CalendarReader.getPublicHolidays(result);
 
@@ -52,6 +72,9 @@ public class CalendarController {
 
     }
 
+    /**
+     * To highlight the current date is public holiday if current date coincides with a public holiday.
+     */
     private void setPublicHolidayOnCalendar() {
         activity.getPublicHolidayTextView().setText(publicHolidays.get(0).getName());
         publicHolidays.remove(0);

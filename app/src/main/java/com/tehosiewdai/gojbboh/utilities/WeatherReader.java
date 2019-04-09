@@ -10,11 +10,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Reader to read weather forecast descriptions.
+ */
 public class WeatherReader {
 
+    /**
+     * Simple name of the class.
+     */
     private static final String TAG = WeatherReader.class.getSimpleName();
 
-    public static ArrayList<Weather> getWeather(String results){
+    /**
+     * Gets the JSON string and returns the list of weather descriptions.
+     *
+     * @param results JSON string to be parsed.
+     * @return list of weather descriptions.
+     */
+    public static ArrayList<Weather> getWeather(String results) {
 
         ArrayList<Weather> weatherDescriptions = new ArrayList<>();
         try {

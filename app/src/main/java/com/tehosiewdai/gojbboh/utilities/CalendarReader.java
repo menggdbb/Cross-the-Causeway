@@ -10,11 +10,23 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Reader to extract public holidays from JSON string.
+ */
 public class CalendarReader {
 
+    /**
+     * Simple name of the class.
+     */
     private static final String TAG = CalendarReader.class.getSimpleName();
 
-    public static ArrayList<PublicHoliday> getPublicHolidays(String results){
+    /**
+     * Gets the JSON string and returns a list of public holidays.
+     *
+     * @param results JSON string to be parsed.
+     * @return a list of public holidays.
+     */
+    public static ArrayList<PublicHoliday> getPublicHolidays(String results) {
         ArrayList<PublicHoliday> publicHolidays = new ArrayList<>();
 
         try {

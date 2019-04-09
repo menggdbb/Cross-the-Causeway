@@ -11,10 +11,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Reader to read money changer locations.
+ */
 public class MoneyChangerReader {
 
+    /**
+     * Simple name of the class.
+     */
     private static final String TAG = MoneyChangerReader.class.getSimpleName();
 
+    /**
+     * Gets the JSON string and returns the list of money changers.
+     *
+     * @param results JSON string to be parsed.
+     * @return the list of money changers.
+     */
     public static ArrayList<MoneyChanger> getMoneyChangerLocations(String results){
         JSONArray features = null;
         ArrayList<MoneyChanger> moneyChangers = null;

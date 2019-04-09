@@ -12,8 +12,18 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * This utility will be used to read from a file.
+ */
 public class FileReader {
 
+    /**
+     * This method returns the contents from the file.
+     *
+     * @param context    activity that is using this reader.
+     * @param resourceId ID of the file.
+     * @return the contents of the file.
+     */
     public static String readFile(Context context, int resourceId) {
         InputStream is = context.getResources().openRawResource(resourceId);
         Writer writer = new StringWriter();

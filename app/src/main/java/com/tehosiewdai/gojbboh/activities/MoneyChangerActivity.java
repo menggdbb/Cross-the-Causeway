@@ -15,13 +15,33 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.tehosiewdai.gojbboh.R;
 import com.tehosiewdai.gojbboh.controller.MoneyChangerController;
 
-
+/**
+ * Activity that opens upon selection at the menu.
+ * This activity acts as the Location of Money Changers Page for this application.
+ */
 public class MoneyChangerActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
+    /**
+     * Controller class variable for logic behind this activity.
+     */
     MoneyChangerController moneyChangerController;
+
+    /**
+     * GoogleMap variable to hold the map.
+     */
     private GoogleMap map;
+
+    /**
+     * Button variable to hold the button to get nearest money changer location.
+     */
     private Button nearestButton;
 
+    /**
+     * Called when activity is starting.
+     *
+     * @param savedInstanceState This Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     *                           This value may be null;
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +49,14 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
 
         nearestButton = findViewById(R.id.buttonMaps);
 
+        //obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
+        //creates an instance of the MoneyChangerController.
         moneyChangerController = new MoneyChangerController(this);
 
     }
@@ -52,14 +74,31 @@ public class MoneyChangerActivity extends AppCompatActivity implements OnMapRead
         moneyChangerController.setMap();
     }
 
+    /**
+     * Gets the GoogleMap map variable.
+     *
+     * @return GoogleMap map variable.
+     */
     public GoogleMap getMap() {
         return map;
     }
 
+    /**
+     * Gets the Button for nearest money changer location.
+     *
+     * @return Button for nearest money changer location.
+     */
     public Button getNearestButton() {
         return nearestButton;
     }
 
+    /**
+     * Event listener for user's response to location services permission.
+     *
+     * @param requestCode  request code from requesting permissions.
+     * @param permissions  the permissions queried by system.
+     * @param grantResults the result of permission queried by system.
+     */
     @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
