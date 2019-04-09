@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tehosiewdai.gojbboh">
+    package="com.tehosiewdai.crossthecauseway">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -40,56 +40,56 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activities.MoneyChangerActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.MoneyChangerActivity"
             android:label="@string/money_changer_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MenuActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MenuActivity" />
         </activity>
         <activity
-            android:name=".activities.WoodlandsTrafficImageActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.WoodlandsTrafficImageActivity"
             android:label="@string/woodlands_title"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName="com.tehosiewdai.crossthecauseway.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.TuasTrafficImageActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.TuasTrafficImageActivity"
             android:label="@string/tuas_title"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName="com.tehosiewdai.crossthecauseway.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.CurrencyActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.CurrencyActivity"
             android:label="@string/currency_exchange_title"
-            android:parentActivityName=".activities.MenuActivity"
+            android:parentActivityName="com.tehosiewdai.crossthecauseway.activities.MenuActivity"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MenuActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MenuActivity" />
         </activity>
 
         <activity
-            android:name=".activities.CalendarActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.CalendarActivity"
             android:label="@string/calendar_title"
-            android:parentActivityName=".activities.MenuActivity" >
+            android:parentActivityName="com.tehosiewdai.crossthecauseway.activities.MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MenuActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MenuActivity" />
         </activity>
         <activity
-            android:name=".activities.MenuActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.MenuActivity"
             android:label="@string/menu"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName="com.tehosiewdai.crossthecauseway.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="com.tehosiewdai.crossthecauseway.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.tehosiewdai.crossthecauseway.activities.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
